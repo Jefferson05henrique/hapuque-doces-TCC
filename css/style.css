@@ -7,6 +7,11 @@
     --FundoClaro: #feebed;
     --CorTercearia: chocolate;
     /* CORES */
+
+    /* img */
+    --widthImg: 60px;
+    --heightImg: 60px;
+    /* img */
 }
 
 * {
@@ -59,12 +64,19 @@ nav {
     ul li:hover {
         list-style: inside;
     }
+
+   
     
-    #logo-header {
+    .logo-header {
         height: 60px;
         width: 60px;
     }
-    
+
+    .img-footer {
+        height: var(--heightImg);
+        width: var(--widthImg);
+    }
+
     .sobre {
         background-color: var(--FundoClaro);
         display: flex;

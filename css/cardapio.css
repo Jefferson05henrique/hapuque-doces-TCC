@@ -3,6 +3,7 @@
 padding: 0;
 box-sizing: border-box;
 background-color: var(--soft-blush);
+color: rgba(255, 255, 255, 0.973);
 }
 
 :root {
@@ -16,3 +17,77 @@ background-color: var(--soft-blush);
     --pastel-pink: #ffcad4ff;
     --cherry-blossom: #f4acb7ff;
 }
+
+nav ul{
+    display: flex;
+    justify-content: space-around;
+}
+
+nav {
+      position: fixed; /* Fixa a barra */
+      top: 0; /* No topo */
+      left: 0;
+      width: 100%; /* Ocupa toda a largura */
+      background-color: var(--CorPrincipal);
+      color: white;
+      padding: 10px 20px;
+      z-index: 1000; /* Garante que fique acima do conteúdo */
+      background-color: var(--pastel-pink);
+    }
+
+    ul li {
+        list-style: none;
+    }
+    
+    ul li:hover {
+        list-style: inside;
+    }
+
+    a {
+        text-decoration: none;
+        color: chocolate;
+    }
+
+    #logo-header {
+        width: 60px;
+        height: 60px;
+    }
+
+    .cardapio {
+        display: flex;
+        justify-content: space-around; /* Alinha os itens com espaço entre eles */
+        flex-wrap: wrap; /* Permite que as opções se ajustem para a próxima linha em telas menores */
+        padding: 20px;
+    }
+
+    .doce {
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin: 10px;
+        width: 250px;
+        padding: 20px;
+        text-align: center;
+        transition: transform 0.3s ease;
+    }
+
+    .doce img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+    }
+    
+    .doce h3 {
+        color: #333;
+        font-size: 1.5em;
+        margin: 10px 0;
+    }
+    
+    .doce p {
+        color: #777;
+        font-size: 1em;
+    }
+    
+    .doce:hover {
+        transform: scale(1.05); /* Aumenta um pouco o tamanho do item ao passar o mouse */
+    }
