@@ -94,3 +94,35 @@ nav {
     .doce:hover {
         transform: scale(1.05); /* Aumenta um pouco o tamanho do item ao passar o mouse */
     }
+
+    /* footer */
+    .direitos {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+        background-color: var(--FundoClaro);
+    }
+    
+    .grid-pedidos {
+        display: flex;
+        justify-content: center;
+        gap: 60px;
+        background-color: var(--FundoClaro);
+    }
+    
+    .coluna {
+        width: 330px;
+    }
+    
+    .coluna img {
+        width: 60px;
+        height: 60px;
+    }
+    
+    iframe {
+        border-radius: 15px;
+        width: 300px;
+        height: 300px;
+    }
+    /* footer */

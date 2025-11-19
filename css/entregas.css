@@ -21,9 +21,110 @@
     /* background-color: var(--CorPrincipal); */
     color: var(--CorTercearia);
     font-family: "Cormorant Garamond", serif;
+    background-color: var(--FundoClaro);
 }
 
 img {
     width: var(--widthImg);
     height: var(--heightImg);
 }
+
+/* NAV */
+nav ul{
+    display: flex;
+    justify-content: space-around;
+}
+
+nav {
+    position: fixed; /* Fixa a barra */
+    top: 0; /* No topo */
+    left: 0;
+    width: 100%; /* Ocupa toda a largura */
+    background-color: var(--CorPrincipal);
+    color: white;
+    padding: 10px 20px;
+    z-index: 1000; /* Garante que fique acima do conteúdo */
+  }
+
+  ul li {
+    list-style: none;
+}
+
+ul li:hover {
+    list-style: inside;
+}
+/* NAV */
+
+/* BANNER */
+.banner-contato {
+    position: relative;
+    width: 100%;
+    height: 420px; /* igual ao da imagem */
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSp1oa51ogZvVRO4cabSNzxEQzvkTyyM8p9A&s"); /* coloque sua imagem */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.banner-contato .overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.30); /* leve escurecida igual ao modelo */
+}
+
+.banner-contato h1 {
+    position: relative;
+    font-size: 70px;
+    color: white;
+    font-family: "Cormorant Garamond", serif;
+}
+/* BANNER */
+
+/* MAIN */
+    .container-entrega {
+        display: flex;
+        justify-content: center;
+        gap: 60px;
+        padding: 80px 50px;
+    }
+
+    .entregas-direita {
+        width: 45%;
+        background-image: url("https://www.mamacida.com.br/image/cache/data/produtos/bolos/chocorango/img-6068-fotor-2024060921345-650x650.jpg");
+    }
+/* MAIN */
+
+/* FOOTER */
+.direitos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    background-color: var(--FundoClaro);
+}
+
+.grid-pedidos {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    background-color: var(--FundoClaro);
+}
+
+.coluna {
+    width: 330px;
+}
+
+.coluna img {
+    width: 60px;
+    height: 60px;
+}
+
+iframe {
+    border-radius: 15px;
+    width: 300px;
+    height: 300px;
+}
+/* FOOTER */
