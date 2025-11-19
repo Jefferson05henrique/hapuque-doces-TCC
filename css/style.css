@@ -67,7 +67,7 @@ ul li {
 }
 
 ul li:hover {
-  list-style: inside;
+  list-style: none;
 }
 
 .logo-header,
