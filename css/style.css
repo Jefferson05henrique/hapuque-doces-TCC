@@ -6,12 +6,12 @@
 
 /* Variáveis CSS para cores e tamanhos reutilizáveis */
 :root {
-  --CorPrincipal: #f5e0e5;    /* Rosa claro - cor principal do site */
-  --CorSecundaria: #666766;    /* Cinza - cor secundária */
-  --FundoClaro: #feebed;       /* Rosa muito claro - fundos de seções */
-  --CorTercearia: #412d24;     /* Marrom escuro - textos e detalhes */
-  --widthImg: 60px;            /* Largura padrão das imagens */
-  --heightImg: 60px;           /* Altura padrão das imagens */
+  --CorPrincipal: #f5e0e5; /* Rosa claro - cor principal do site */
+  --CorSecundaria: #666766; /* Cinza - cor secundária */
+  --FundoClaro: #feebed; /* Rosa muito claro - fundos de seções */
+  --CorTercearia: #412d24; /* Marrom escuro - textos e detalhes */
+  --widthImg: 60px; /* Largura padrão das imagens */
+  --heightImg: 60px; /* Altura padrão das imagens */
 }
 
 /* ============================================
@@ -118,7 +118,7 @@ header nav {
 
 /* Linha animada que aparece abaixo do link no hover */
 .menu-desktop a::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
@@ -174,7 +174,6 @@ header nav {
   transition: all 0.3s ease;
 }
 
-
 /* Primeira linha - rotaciona 45° para formar o X quando menu está ativo */
 .menu-hamburger.active span:nth-child(1) {
   transform: rotate(45deg) translate(8px, 8px);
@@ -185,7 +184,6 @@ header nav {
 .menu-hamburger.active span:nth-child(2) {
   opacity: 0;
 }
-
 
 /* Terceira linha - rotaciona -45° para completar o X quando menu está ativo */
 .menu-hamburger.active span:nth-child(3) {
@@ -201,7 +199,11 @@ header nav {
   left: 0;
   width: 100%;
   height: 100vh;
-  background: linear-gradient(135deg, rgba(65, 45, 36, 0.97) 0%, rgba(102, 103, 102, 0.95) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(65, 45, 36, 0.97) 0%,
+    rgba(102, 103, 102, 0.95) 100%
+  );
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -235,10 +237,18 @@ header nav {
 }
 
 /* Delays progressivos para efeito cascata nos itens do menu */
-.menu-overlay.active li:nth-child(1) { transition-delay: 0.1s; }
-.menu-overlay.active li:nth-child(2) { transition-delay: 0.2s; }
-.menu-overlay.active li:nth-child(3) { transition-delay: 0.3s; }
-.menu-overlay.active li:nth-child(4) { transition-delay: 0.4s; }
+.menu-overlay.active li:nth-child(1) {
+  transition-delay: 0.1s;
+}
+.menu-overlay.active li:nth-child(2) {
+  transition-delay: 0.2s;
+}
+.menu-overlay.active li:nth-child(3) {
+  transition-delay: 0.3s;
+}
+.menu-overlay.active li:nth-child(4) {
+  transition-delay: 0.4s;
+}
 
 /* Links do menu overlay - tamanho grande e elegante */
 .menu-overlay a {
@@ -253,7 +263,7 @@ header nav {
 
 /* Linha decorativa que aparece sob os links no hover */
 .menu-overlay a::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 50%;
@@ -291,14 +301,14 @@ main {
    SEÇÕES - PÁGINA INICIAL
    ============================================ */
 
-   /* HERO FULL-SCREEN */
+/* HERO FULL-SCREEN */
 /* Seção hero que ocupa toda a altura da tela com imagem de fundo */
 .hapu-fullscreen {
   position: relative;
   width: 100%;
   height: 100vh;
   background: linear-gradient(rgba(65, 45, 36, 0.4), rgba(65, 45, 36, 0.6)),
-              url('https://images.unsplash.com/photo-1486427944299-d1955d23e34d?w=1920');
+    url("https://images.unsplash.com/photo-1486427944299-d1955d23e34d?w=1920");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -317,7 +327,11 @@ main {
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
+  background: radial-gradient(
+    circle at center,
+    transparent 0%,
+    rgba(0, 0, 0, 0.3) 100%
+  );
   z-index: 1;
 }
 
@@ -443,7 +457,11 @@ main {
 
 /* Animação de salto para o indicador de scroll */
 @keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
     transform: translateX(-50%) translateY(0);
   }
   40% {
@@ -491,7 +509,6 @@ main {
   margin-bottom: 20px;
   color: var(--CorSecundaria);
 }
-
 
 /* ============================================
    CARROSSEL DE GALERIA
@@ -562,7 +579,11 @@ main {
   left: 10px;
   right: 10px;
   bottom: 10px;
-  background: linear-gradient(to bottom, transparent 0%, rgba(65, 45, 36, 0.95) 70%);
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(65, 45, 36, 0.95) 70%
+  );
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -690,19 +711,130 @@ main {
   border-radius: 6px;
 }
 
-/* SEÇÃO: OS MAIS PEDIDOS */
-.mais-pedidos {
+/* CARDS 3D */
+/* Seção de destaques com cards em 3D */
+.destaques-section {
+  padding: 100px 20px;
+  background: linear-gradient(
+    135deg,
+    var(--FundoClaro) 0%,
+    var(--CorPrincipal) 100%
+  );
   text-align: center;
-  padding: 40px 20px;
-  background-color: #ffe7e7; /* Rosa claro */
 }
 
-/* Título da seção */
-.mais-pedidos h2 {
-  font-size: clamp(24px, 5vw, 36px); /* Tamanho responsivo do texto */
-  font-weight: bold;
-  color: #5a2e0d;
-  margin-bottom: 40px;
+/* Título da seção de destaques */
+.destaques-titulo {
+  font-size: clamp(32px, 6vw, 48px);
+  margin-bottom: 15px;
+  color: var(--CorTercearia);
+}
+
+/* Subtítulo da seção de destaques */
+.destaques-subtitulo {
+  font-size: clamp(16px, 3vw, 20px);
+  color: var(--CorSecundaria);
+  margin-bottom: 60px;
+}
+
+/* Container grid para os cards de produtos */
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto 60px;
+}
+
+/* Wrapper do card com perspectiva 3D */
+.card-3d {
+  perspective: 1000px;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.6s ease;
+}
+
+/* Estado visível do card - ativado por JavaScript */
+.card-3d.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Conteúdo interno do card com efeitos 3D */
+.card-inner {
+  position: relative;
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Efeito 3D no hover - card se eleva e rotaciona */
+.card-3d:hover .card-inner {
+  transform: translateY(-15px) rotateX(5deg);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+}
+
+/* Imagem do produto no card */
+.card-inner img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+/* Conteúdo textual do card */
+.card-content {
+  padding: 25px;
+  text-align: left;
+}
+
+/* Título do produto no card */
+.card-content h3 {
+  font-size: clamp(20px, 4vw, 26px);
+  margin-bottom: 10px;
+  color: var(--CorTercearia);
+}
+
+/* Descrição do produto no card */
+.card-content p {
+  font-size: clamp(14px, 2.5vw, 16px);
+  color: var(--CorSecundaria);
+  margin-bottom: 15px;
+  line-height: 1.5;
+}
+
+/* Badge de preço com gradiente */
+.card-price {
+  display: inline-block;
+  padding: 8px 20px;
+  background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+  color: var(--CorTercearia);
+  font-weight: 700;
+  font-size: clamp(16px, 3vw, 20px);
+  border-radius: 25px;
+}
+
+/* Botão para ver cardápio completo */
+.btn-cardapio {
+  display: inline-block;
+  padding: 18px 50px;
+  font-size: clamp(14px, 2.5vw, 18px);
+  font-weight: 600;
+  background: var(--CorTercearia);
+  color: #fff;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 8px 25px rgba(65, 45, 36, 0.3);
+}
+
+/* Efeito hover do botão cardápio */
+.btn-cardapio:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 12px 35px rgba(65, 45, 36, 0.4);
+  background: var(--CorSecundaria);
 }
 
 /* Grid de produtos mais pedidos */
@@ -712,86 +844,6 @@ main {
   gap: 40px; /* Reduzido para melhor responsividade */
   padding: 40px 20px;
   flex-wrap: wrap; /* Permite quebra de linha */
-}
-
-/* Cada coluna de produtos */
-.coluna {
-  width: 100%;
-  max-width: 330px; /* Largura máxima */
-  text-align: left;
-  flex: 1 1 280px; /* Flexível com base mínima */
-}
-
-/* Item individual de produto */
-.item {
-  display: flex;
-  align-items: flex-start;
-  gap: 15px;
-  text-align: left;
-  border-bottom: 1px dashed #b0755e; /* Linha divisória decorativa */
-  padding-bottom: 15px;
-  margin-bottom: 20px;
-  transition: transform 0.3s ease; /* Animação suave */
-}
-
-/* Efeito hover no item */
-.item:hover {
-  transform: translateX(5px); /* Leve movimento à direita */
-}
-
-/* Imagem do item de produto */
-.item img {
-  width: 70px;
-  height: 70px;
-  object-fit: cover; /* Mantém proporção sem distorcer */
-  border-radius: 10px; /* Bordas arredondadas */
-  flex-shrink: 0; /* Não permite encolhimento */
-}
-
-/* Título do item */
-.item h3 {
-  font-size: clamp(16px, 3vw, 18px); /* Responsivo */
-  font-weight: bold;
-  color: #5a2e0d;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap; /* Permite quebra se necessário */
-}
-
-/* Preço dentro do título */
-.item h3 span {
-  margin-left: 10px;
-  white-space: nowrap; /* Não quebra o preço */
-}
-
-/* Descrição do item */
-.item p {
-  font-size: clamp(12px, 2.5vw, 14px); /* Responsivo */
-  color: #4e4e4e;
-  margin-top: 5px;
-  line-height: 1.4;
-}
-
-/* Botão para ver cardápio completo */
-.botao-cardapio {
-  display: inline-block;
-  margin-top: 30px;
-  padding: 15px 40px;
-  font-size: clamp(14px, 2.5vw, 16px); /* Responsivo */
-  font-weight: bold;
-  background: linear-gradient(to right, #ffb6b6, #ff7f50); /* Gradiente */
-  color: #fff;
-  border-radius: 30px; /* Bordas bem arredondadas */
-  text-decoration: none;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
-  transition: all 0.3s ease; /* Animação suave */
-  cursor: pointer;
-}
-
-/* Efeito hover no botão */
-.botao-cardapio:hover {
-  transform: scale(1.05); /* Aumenta ligeiramente */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Sombra mais intensa */
 }
 
 /* ============================================
@@ -878,7 +930,10 @@ main {
 /* Grid de produtos do cardápio */
 .cardapio {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Grid responsivo */
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(250px, 1fr)
+  ); /* Grid responsivo */
   gap: 30px; /* Espaçamento entre cards */
   padding: 40px 20px;
   background-color: var(--CorPrincipal);
@@ -1195,70 +1250,6 @@ textarea {
   margin: 0 auto;
 }
 
-/* Cada coluna individual do footer */
-.coluna {
-  background-color: var(--CorPrincipal);
-  flex: 1 1 250px; /* Flexível com base mínima */
-  min-width: 200px;
-  padding: 20px;
-}
-
-/* Títulos e textos dentro das colunas */
-.coluna h2,
-.coluna p,
-.coluna ul,
-.coluna li,
-.coluna a {
-  background-color: var(--CorPrincipal);
-}
-
-/* Títulos das colunas */
-.coluna h2 {
-  font-size: clamp(18px, 3vw, 22px); /* Responsivo */
-  margin-bottom: 15px;
-  color: var(--CorTercearia);
-}
-
-/* Parágrafos nas colunas */
-.coluna p {
-  font-size: clamp(14px, 2.5vw, 16px); /* Responsivo */
-  line-height: 1.6;
-  margin-bottom: 10px;
-}
-
-/* Links nas colunas */
-.coluna a:hover {
-  color: #ff7f50; /* Cor laranja no hover */
-  text-decoration: underline;
-}
-
-/* Listas do footer */
-.coluna ul {
-  list-style: none;
-  padding: 0;
-}
-
-.coluna ul li {
-  margin: 8px 0;
-  padding-left: 0;
-}
-
-/* Imagens do footer (ícones de redes sociais) */
-.coluna img,
-.img-footer {
-  width: 40px; /* Reduzido para melhor responsividade */
-  height: 40px;
-  background-color: transparent;
-  object-fit: contain;
-  transition: transform 0.3s ease;
-}
-
-/* Efeito hover nas imagens */
-.coluna img:hover,
-.img-footer:hover {
-  transform: scale(1.1); /* Aumenta ligeiramente */
-}
-
 /* Endereço no footer */
 address,
 address h2,
@@ -1307,7 +1298,7 @@ iframe {
     padding: 15px 20px;
   }
 
- /* Menu desktop oculto no mobile */
+  /* Menu desktop oculto no mobile */
   .menu-desktop {
     display: none !important;
   }
@@ -1322,7 +1313,7 @@ iframe {
     background-attachment: scroll;
   }
 
-    /* Botões ocupam largura total em mobile */
+  /* Botões ocupam largura total em mobile */
   .btn-primary,
   .btn-secondary {
     width: 100%;
@@ -1355,7 +1346,7 @@ iframe {
     margin-bottom: 15px;
   }
 
-/* CARROSSEL DE GALERIA - Mobile */
+  /* CARROSSEL DE GALERIA - Mobile */
   /* 1 slide visível por vez em mobile */
   .carrossel-galeria-slide {
     min-width: 100%;
@@ -1371,52 +1362,15 @@ iframe {
     display: none; /* Oculta botões para melhor usabilidade em mobile */
   }
 
-  /* OS MAIS PEDIDOS - Layout mobile */
-  .mais-pedidos {
-    padding: 30px 15px;
-  }
-
-  .mais-pedidos h2 {
-    font-size: 24px;
-    margin-bottom: 25px;
+  /* Cards de destaques em coluna única */
+  .cards-container {
+    grid-template-columns: 1fr;
   }
 
   /* Grid de pedidos em coluna única */
   .grid-pedidos {
     gap: 20px;
     padding: 20px 10px;
-  }
-
-  /* Itens menores em mobile */
-  .item {
-    flex-direction: row;
-    align-items: center;
-    gap: 12px;
-    padding-bottom: 12px;
-    margin-bottom: 15px;
-  }
-
-  .item img {
-    width: 60px; /* Tamanho médio para mobile */
-    height: 60px;
-  }
-
-  .item h3 {
-    font-size: 15px;
-  }
-
-  .item p {
-    font-size: 13px;
-  }
-
-  /* Botão adaptado para mobile */
-  .botao-cardapio {
-    padding: 12px 25px;
-    font-size: 15px;
-    width: 90%; /* Quase largura total */
-    max-width: 300px;
-    margin: 20px auto; /* Centraliza */
-    display: block;
   }
 
   /* BANNERS - Altura reduzida em mobile */
@@ -1620,57 +1574,6 @@ iframe {
     align-items: center;
   }
 
-  /* Colunas do footer centralizadas */
-  .coluna {
-    width: 100%;
-    max-width: 350px;
-    margin: 0 auto;
-    text-align: center;
-    padding: 15px;
-    min-width: auto;
-  }
-
-  .final .coluna {
-    width: 100%;
-    max-width: 350px;
-    text-align: center;
-  }
-
-  /* Endereço centralizado */
-  .final .coluna address {
-    text-align: center;
-  }
-
-  .coluna h2 {
-    font-size: 20px;
-    margin-bottom: 12px;
-  }
-
-  .coluna h2,
-  .coluna p,
-  .coluna address {
-    text-align: center;
-  }
-
-  /* Listas do footer */
-  .final .coluna ul {
-    display: block;
-    padding: 0;
-    list-style: none;
-  }
-
-  .coluna ul {
-    padding: 0;
-  }
-
-  .final .coluna ul li {
-    margin: 12px 0;
-  }
-
-  .coluna ul li {
-    margin: 8px 0;
-  }
-
   /* Mapa responsivo em mobile */
   iframe {
     width: 100%;
@@ -1706,11 +1609,15 @@ iframe {
     display: none !important;
   }
 
-
-    /* CARROSSEL DE GALERIA - Tablet */
+  /* CARROSSEL DE GALERIA - Tablet */
   /* 2 slides visíveis em tablets */
   .carrossel-galeria-slide {
     min-width: 50%;
+  }
+
+  /* Cards de destaques em 2 colunas */
+  .cards-container {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   /* GRID DE CARDÁPIO - 2 colunas em tablets */
@@ -1743,10 +1650,6 @@ iframe {
     grid-template-columns: repeat(2, 1fr);
     gap: 40px;
   }
-
-  .coluna {
-    max-width: 100%;
-  }
 }
 
 /* ============================================
@@ -1767,10 +1670,6 @@ iframe {
   /* Grid de produtos - ajuste para 2 colunas */
   .grid-pedidos {
     gap: 30px;
-  }
-
-  .coluna {
-    flex: 1 1 280px;
   }
 }
 
