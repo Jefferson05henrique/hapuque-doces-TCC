@@ -1,45 +1,54 @@
 /* ============================================
-   IMPORTS & VARIAVEIS
+   IMPORTS & VARIÁVEIS
    ============================================ */
+/* Importação da fonte Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap");
 
+/* Variáveis CSS para cores e tamanhos reutilizáveis */
 :root {
-  --CorPrincipal: #f5e0e5;
-  --CorSecundaria: #666766;
-  --FundoClaro: #feebed;
-  --CorTercearia: #412d24;
-  --widthImg: 60px;
-  --heightImg: 60px;
+  --CorPrincipal: #f5e0e5;    /* Rosa claro - cor principal do site */
+  --CorSecundaria: #666766;    /* Cinza - cor secundária */
+  --FundoClaro: #feebed;       /* Rosa muito claro - fundos de seções */
+  --CorTercearia: #412d24;     /* Marrom escuro - textos e detalhes */
+  --widthImg: 60px;            /* Largura padrão das imagens */
+  --heightImg: 60px;           /* Altura padrão das imagens */
 }
 
 /* ============================================
-   ESTILOS GERAIS
+   ESTILOS GERAIS (RESET E BASE)
    ============================================ */
+/* Reset CSS - Remove margens e paddings padrão dos navegadores */
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  box-sizing: border-box; /* Inclui padding e border no cálculo de width/height */
   color: var(--CorTercearia);
   font-family: "Cormorant Garamond", serif;
 }
 
+/* Cor de fundo principal do site */
 body {
   background-color: var(--CorPrincipal);
+  overflow-x: hidden; /* Previne scroll horizontal indesejado */
 }
 
+/* Remove sublinhado dos links e define cor padrão */
 a {
   text-decoration: none;
   color: var(--CorTercearia);
+  transition: all 0.3s ease; /* Transição suave para hover */
 }
 
+/* Tamanho padrão das imagens usando variáveis CSS */
 img {
-  width: var(--widthImg);
-  height: var(--heightImg);
+  max-width: 100%; /* Imagens responsivas - não ultrapassam o container */
+  height: auto; /* Mantém proporção da imagem */
 }
 
 /* ============================================
    HEADER & NAVEGAÇÃO
    ============================================ */
+/* Cor de fundo do cabeçalho e elementos de navegação */
 header,
 nav,
 nav ul,
@@ -47,432 +56,635 @@ nav ul li {
   background-color: var(--CorPrincipal);
 }
 
+/* Menu de navegação fixo no topo */
 nav {
-  position: fixed;
+  position: fixed; /* Fixa o menu no topo ao rolar a página */
   top: 0;
   left: 0;
   width: 100%;
   background-color: var(--CorPrincipal);
   padding: 10px 20px;
-  z-index: 1000;
+  z-index: 1000; /* Garante que o menu fique acima de outros elementos */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil para destacar o menu */
 }
 
+/* Lista de navegação em linha */
 nav ul {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-around; /* Distribui itens igualmente */
+  align-items: center; /* Centraliza verticalmente */
+  flex-wrap: wrap; /* Permite quebra de linha em telas pequenas */
+  list-style: none;
 }
 
+/* Remove marcadores da lista */
 ul li {
   list-style: none;
+  padding: 5px 10px; /* Espaçamento interno para área clicável maior */
 }
 
+/* Efeito hover nos itens do menu */
 ul li:hover {
   list-style: none;
+  transform: translateY(-2px); /* Leve movimento para cima no hover */
+  transition: transform 0.3s ease;
 }
 
+/* Logo do cabeçalho com tamanho fixo */
 .logo-header,
 #logo-header {
   width: 60px;
   height: 60px;
   background-color: transparent;
+  object-fit: contain; /* Mantém proporção da logo */
 }
 
 /* ============================================
-   MAIN
+   CONTEÚDO PRINCIPAL
    ============================================ */
+/* Espaçamento do conteúdo principal para não ficar atrás do menu fixo */
 main {
-  margin-top: 60px;
+  margin-top: 80px; /* Espaço para o menu fixo (aumentado para mais conforto) */
   padding: 20px;
+  min-height: calc(100vh - 80px); /* Garante altura mínima da página */
 }
 
 /* ============================================
-   SECTIONS - PAGINA INICIAL
+   SEÇÕES - PÁGINA INICIAL
    ============================================ */
+/* Seção "Sobre" com layout centralizado */
 .sobre {
   background-color: var(--FundoClaro);
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 20px;
+  padding: 40px 20px; /* Aumentado padding para melhor espaçamento */
+  text-align: center; /* Centraliza o texto */
 }
 
-/* CARROSSEL */
+.sobre h1,
+.sobre h2 {
+  margin-bottom: 20px;
+  line-height: 1.3; /* Melhora legibilidade */
+}
+
+/* CARROSSEL DE IMAGENS */
+/* Container da seção MVV (Missão, Visão, Valores) */
 .mvv {
-  padding: 50px;
+  padding: 50px 20px; /* Padding horizontal responsivo */
+  background-color: var(--CorPrincipal);
 }
 
+/* Container do carrossel com largura máxima */
 .carrossel-container {
   width: 100%;
   max-width: 600px;
-  margin: 0 auto;
-  overflow: hidden;
+  margin: 0 auto; /* Centraliza o carrossel */
+  overflow: hidden; /* Esconde conteúdo que transborda */
+  border-radius: 10px; /* Bordas arredondadas */
 }
 
+/* Slides internos do carrossel */
 .carrossel-inner {
   display: flex;
-  transition: transform 0.5s ease-in-out;
-  width: 300%;
+  transition: transform 0.5s ease-in-out; /* Animação suave entre slides */
+  width: 300%; /* 3 slides = 300% */
 }
 
+/* Cada slide individual */
 .slide {
-  flex: 0 0 33.333%;
+  flex: 0 0 33.333%; /* Cada slide ocupa 1/3 do container */
   width: 33.333%;
   height: auto;
-}
-
-.slide img {
-  width: 500px;
-  display: block;
-}
-
-/* OS MAIS PEDIDOS */
-.mais-pedidos {
-  text-align: center;
-  padding: 40px 20px;
-  background-color: #ffe7e7;
-}
-
-.mais-pedidos h2 {
-  font-size: 36px;
-  font-weight: bold;
-  color: #5a2e0d;
-  margin-bottom: 40px;
-}
-
-.grid-pedidos {
-  display: flex;
-  justify-content: center;
-  gap: 60px;
-  padding: 40px 20px;
-}
-
-.coluna {
-  width: 330px;
-  text-align: left;
-}
-
-.item {
-  display: flex;
-  align-items: flex-start;
-  gap: 15px;
-  text-align: left;
-  border-bottom: 1px dashed #b0755e;
-  padding-bottom: 15px;
-  margin-bottom: 20px;
-}
-
-.item img {
-  width: 70px;
-  height: 70px;
-  object-fit: cover;
-  border-radius: 10px;
-}
-
-.item h3 {
-  font-size: 18px;
-  font-weight: bold;
-  color: #5a2e0d;
-  display: flex;
-  justify-content: space-between;
-}
-
-.item h3 span {
-  margin-left: 10px;
-}
-
-.item p {
-  font-size: 14px;
-  color: #4e4e4e;
-  margin-top: 5px;
-}
-
-.botao-cardapio {
-  display: inline-block;
-  margin-top: 30px;
-  padding: 15px 40px;
-  font-size: 16px;
-  font-weight: bold;
-  background: linear-gradient(to right, #ffb6b6, #ff7f50);
-  color: #fff;
-  border-radius: 30px;
-  text-decoration: none;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: 0.3s;
-}
-
-.botao-cardapio:hover {
-  transform: scale(1.05);
-}
-
-/* ============================================
-   BANNER SECTIONS
-   ============================================ */
-.banner-contato,
-.banner-encomenda {
-  position: relative;
-  width: 100%;
-  height: 420px;
-  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSp1oa51ogZvVRO4cabSNzxEQzvkTyyM8p9A&s");
-  background-size: cover;
-  background-position: center;
-  background-color: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+/* Imagens dentro dos slides - responsivas */
+.slide img {
+  width: 100%; /* Ocupa toda largura do slide */
+  max-width: 500px; /* Largura máxima */
+  height: auto; /* Mantém proporção */
+  display: block;
+  object-fit: cover; /* Cobre área sem distorcer */
+}
+
+/* SEÇÃO: OS MAIS PEDIDOS */
+.mais-pedidos {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: #ffe7e7; /* Rosa claro */
+}
+
+/* Título da seção */
+.mais-pedidos h2 {
+  font-size: clamp(24px, 5vw, 36px); /* Tamanho responsivo do texto */
+  font-weight: bold;
+  color: #5a2e0d;
+  margin-bottom: 40px;
+}
+
+/* Grid de produtos mais pedidos */
+.grid-pedidos {
+  display: flex;
+  justify-content: center;
+  gap: 40px; /* Reduzido para melhor responsividade */
+  padding: 40px 20px;
+  flex-wrap: wrap; /* Permite quebra de linha */
+}
+
+/* Cada coluna de produtos */
+.coluna {
+  width: 100%;
+  max-width: 330px; /* Largura máxima */
+  text-align: left;
+  flex: 1 1 280px; /* Flexível com base mínima */
+}
+
+/* Item individual de produto */
+.item {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  text-align: left;
+  border-bottom: 1px dashed #b0755e; /* Linha divisória decorativa */
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease; /* Animação suave */
+}
+
+/* Efeito hover no item */
+.item:hover {
+  transform: translateX(5px); /* Leve movimento à direita */
+}
+
+/* Imagem do item de produto */
+.item img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover; /* Mantém proporção sem distorcer */
+  border-radius: 10px; /* Bordas arredondadas */
+  flex-shrink: 0; /* Não permite encolhimento */
+}
+
+/* Título do item */
+.item h3 {
+  font-size: clamp(16px, 3vw, 18px); /* Responsivo */
+  font-weight: bold;
+  color: #5a2e0d;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap; /* Permite quebra se necessário */
+}
+
+/* Preço dentro do título */
+.item h3 span {
+  margin-left: 10px;
+  white-space: nowrap; /* Não quebra o preço */
+}
+
+/* Descrição do item */
+.item p {
+  font-size: clamp(12px, 2.5vw, 14px); /* Responsivo */
+  color: #4e4e4e;
+  margin-top: 5px;
+  line-height: 1.4;
+}
+
+/* Botão para ver cardápio completo */
+.botao-cardapio {
+  display: inline-block;
+  margin-top: 30px;
+  padding: 15px 40px;
+  font-size: clamp(14px, 2.5vw, 16px); /* Responsivo */
+  font-weight: bold;
+  background: linear-gradient(to right, #ffb6b6, #ff7f50); /* Gradiente */
+  color: #fff;
+  border-radius: 30px; /* Bordas bem arredondadas */
+  text-decoration: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
+  transition: all 0.3s ease; /* Animação suave */
+  cursor: pointer;
+}
+
+/* Efeito hover no botão */
+.botao-cardapio:hover {
+  transform: scale(1.05); /* Aumenta ligeiramente */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Sombra mais intensa */
+}
+
+/* ============================================
+   BANNERS DE PÁGINAS
+   ============================================ */
+/* Banners hero para páginas de contato e encomendas */
+.banner-contato,
+.banner-encomenda {
+  position: relative;
+  width: 100%;
+  height: clamp(250px, 50vh, 420px); /* Altura responsiva entre 250px e 420px */
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSp1oa51ogZvVRO4cabSNzxEQzvkTyyM8p9A&s");
+  background-size: cover; /* Cobre toda área */
+  background-position: center; /* Centraliza imagem */
+  background-attachment: fixed; /* Efeito parallax (desabilita em mobile) */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Overlay escuro sobre o banner para melhor legibilidade do texto */
 .banner-contato .overlay,
 .banner-encomenda .overlay {
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.3); /* Preto com 30% de opacidade */
+  z-index: 1;
 }
 
-.banner-contato h1 {
+/* Título do banner */
+.banner-contato h1,
+.banner-encomenda h1,
+.banner-encomenda h2 {
   position: relative;
-  font-size: 70px;
+  font-size: clamp(32px, 8vw, 70px); /* Tamanho responsivo */
   color: white;
   font-family: "Cormorant Garamond", serif;
   background-color: transparent;
+  z-index: 2; /* Acima do overlay */
+  text-align: center;
+  padding: 0 20px; /* Padding para não encostar nas bordas */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra para destacar texto */
 }
 
 /* ============================================
-    PAGINA CARDÁPIO
+   PÁGINA CARDÁPIO
    ============================================ */
+/* Container do campo de busca */
 .busca-container {
   padding: 40px 20px 20px;
   text-align: center;
   background-color: var(--CorPrincipal);
 }
 
+/* Campo de busca de produtos */
 #campoBusca {
   width: 100%;
   max-width: 600px;
   padding: 15px 20px;
-  font-size: 1.1em;
+  font-size: clamp(1em, 2vw, 1.1em); /* Tamanho responsivo */
   border: 2px solid var(--CorTercearia);
-  border-radius: 25px;
+  border-radius: 25px; /* Bordas arredondadas */
   background-color: white;
   color: var(--CorTercearia);
-  outline: none;
+  outline: none; /* Remove outline padrão */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 
+/* Efeito de foco no campo de busca */
+#campoBusca:focus {
+  border-color: #ff7f50; /* Laranja ao focar */
+  box-shadow: 0 4px 8px rgba(255, 127, 80, 0.3);
+}
+
+/* Placeholder do campo de busca */
 #campoBusca::placeholder {
   color: var(--CorSecundaria);
   opacity: 0.7;
 }
 
+/* Grid de produtos do cardápio */
 .cardapio {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Grid responsivo */
+  gap: 30px; /* Espaçamento entre cards */
+  padding: 40px 20px;
   background-color: var(--CorPrincipal);
+  justify-items: center; /* Centraliza os cards */
 }
 
+/* Card individual de doce/produto */
 .doce {
   background-color: white;
-  border-radius: 8px;
+  border-radius: 12px; /* Bordas mais arredondadas */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin: 10px;
-  width: 250px;
+  margin: 0;
+  width: 100%;
+  max-width: 300px; /* Largura máxima do card */
   padding: 20px;
   text-align: center;
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
+/* Efeito hover no card */
+.doce:hover {
+  transform: translateY(-10px); /* Move para cima */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra mais intensa */
+}
+
+/* Imagem do produto no card */
 .doce img {
   width: 100%;
-  height: auto;
+  height: 200px; /* Altura fixa para uniformidade */
+  object-fit: cover; /* Cobre área sem distorcer */
   border-radius: 8px;
   background-color: transparent;
+  margin-bottom: 15px;
 }
 
-.doce h3,
+/* Título do produto */
+.doce h3 {
+  background-color: white;
+  font-size: clamp(1.2em, 3vw, 1.5em); /* Responsivo */
+  margin: 10px 0;
+  color: var(--CorTercearia);
+}
+
+/* Descrição/preço do produto */
 .doce p {
   background-color: white;
-  font-size: 1.5em;
+  font-size: clamp(0.9em, 2vw, 1em); /* Responsivo */
   margin: 10px 0;
-}
-
-.doce p {
-  font-size: 1em;
-}
-
-.doce:hover {
-  transform: scale(1.05);
+  color: var(--CorSecundaria);
+  line-height: 1.5;
 }
 
 /* ============================================
-   PAGINA CONTATO
+   PÁGINA CONTATO
    ============================================ */
+/* Container principal de contato - layout de 2 colunas */
 .container-contato {
   display: flex;
   justify-content: center;
   gap: 60px;
-  padding: 80px 50px;
+  padding: 60px 20px; /* Padding responsivo */
+  flex-wrap: wrap; /* Permite quebra em telas menores */
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
+/* Coluna esquerda - Informações de contato */
 .contato-esquerda {
-  width: 45%;
+  flex: 1 1 400px; /* Flexível com base mínima */
+  min-width: 300px;
 }
 
+/* Título da seção de contato */
 .contato-esquerda h2 {
-  font-size: 40px;
+  font-size: clamp(28px, 5vw, 40px); /* Responsivo */
   margin-bottom: 20px;
+  color: var(--CorTercearia);
 }
 
+/* Parágrafo de introdução */
 .contato-esquerda p {
-  font-size: 20px;
+  font-size: clamp(16px, 3vw, 20px); /* Responsivo */
   margin-bottom: 30px;
-  line-height: 28px;
+  line-height: 1.6; /* Melhora legibilidade */
+  color: var(--CorSecundaria);
 }
 
+/* Item de informação (telefone, email, etc) */
 .info-item {
   display: flex;
   align-items: center;
   gap: 20px;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
+  transition: transform 0.3s ease;
 }
 
+/* Efeito hover no item de informação */
+.info-item:hover {
+  transform: translateX(5px);
+}
+
+/* Ícone do item de informação */
 .info-item .icone img {
   width: 50px;
   height: 50px;
+  object-fit: contain;
+  flex-shrink: 0;
 }
 
+/* Coluna direita - Formulário de contato */
 .contato-direita {
-  width: 45%;
+  flex: 1 1 400px; /* Flexível com base mínima */
   background-color: var(--CorPrincipal);
+  min-width: 300px;
 }
 
+/* Formulário de contato */
 form {
   display: flex;
   flex-direction: column;
   gap: 25px;
+  width: 100%;
 }
 
+/* Container para campos em duas colunas */
 .duas-colunas {
   display: flex;
   gap: 20px;
+  flex-wrap: wrap; /* Quebra em telas pequenas */
 }
 
+/* Campo individual do formulário */
 .campo {
   display: flex;
   flex-direction: column;
   width: 100%;
+  min-width: 0; /* Permite encolhimento */
 }
 
+/* Label do campo */
 .campo label {
-  font-size: 18px;
+  font-size: clamp(16px, 2.5vw, 18px); /* Responsivo */
   margin-bottom: 5px;
+  color: var(--CorTercearia);
+  font-weight: 500;
 }
 
+/* Inputs e textarea do formulário */
 input,
 textarea {
-  padding: 12px;
+  padding: 12px 15px;
   background-color: var(--FundoClaro);
   border: 1px solid #c5c5c5;
-  border-radius: 4px;
-  font-size: 16px;
+  border-radius: 8px; /* Bordas mais arredondadas */
+  font-size: clamp(14px, 2vw, 16px); /* Responsivo */
+  font-family: "Cormorant Garamond", serif;
+  transition: all 0.3s ease;
+  width: 100%;
 }
 
+/* Efeito de foco nos campos */
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: #e9aaaa;
+  box-shadow: 0 0 0 3px rgba(233, 170, 170, 0.2);
+}
+
+/* Área de texto maior para mensagem */
 textarea {
   height: 180px;
+  resize: vertical; /* Permite redimensionar apenas verticalmente */
+  min-height: 120px;
 }
 
+/* Botão de enviar formulário */
 .btn-enviar {
-  width: 180px;
+  width: 100%;
+  max-width: 200px;
   padding: 15px;
   background-color: #e9aaaa;
   border: none;
   cursor: pointer;
-  border-radius: 4px;
-  font-size: 18px;
+  border-radius: 8px;
+  font-size: clamp(16px, 2.5vw, 18px); /* Responsivo */
+  font-weight: bold;
+  color: var(--CorTercearia);
+  transition: all 0.3s ease;
+  align-self: flex-start; /* Alinha à esquerda */
+}
+
+/* Efeito hover no botão */
+.btn-enviar:hover {
+  background-color: #d89999;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* ============================================
-   PAGINA ENTREGAS
+   PÁGINA ENTREGAS/RETIRADAS
    ============================================ */
+/* Container principal - layout de 2 colunas (texto e imagem) */
 .retiradas-entregas {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 40px;
   padding: 60px 5%;
+  flex-wrap: wrap; /* Permite quebra em telas menores */
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
+/* Coluna de texto com informações */
 .retiradas-entregas .texto {
-  flex: 1;
+  flex: 1 1 400px; /* Flexível com base mínima */
   max-width: 600px;
+  min-width: 300px;
 }
 
+/* Título principal da seção */
 .retiradas-entregas h1 {
-  font-size: 48px;
-  margin-bottom: 40px;
+  font-size: clamp(32px, 6vw, 48px); /* Responsivo */
+  margin-bottom: 30px;
   font-weight: 500;
+  color: var(--CorTercearia);
+  line-height: 1.2;
 }
 
+/* Subtítulos da seção */
 .retiradas-entregas h3 {
   margin-top: 25px;
-  font-size: 19px;
+  font-size: clamp(17px, 3vw, 19px); /* Responsivo */
   font-weight: 600;
+  color: var(--CorTercearia);
 }
 
+/* Parágrafos de informação */
 .retiradas-entregas p {
   margin: 8px 0;
   line-height: 1.6;
-  font-size: 17px;
+  font-size: clamp(15px, 2.5vw, 17px); /* Responsivo */
+  color: var(--CorSecundaria);
 }
 
+/* Container de tempo de preparo/entrega */
 .tempo {
   display: flex;
   align-items: center;
   gap: 15px;
-  margin-top: 50px;
-  font-size: 20px;
+  margin-top: 40px;
+  padding: 20px;
+  background-color: var(--FundoClaro);
+  border-radius: 10px;
+  flex-wrap: wrap; /* Permite quebra do conteúdo */
 }
 
+/* Ícone circular do tempo */
 .tempo .icon {
   width: 55px;
   height: 55px;
   border: 2px solid #e3c8c8;
-  border-radius: 50%;
+  border-radius: 50%; /* Círculo perfeito */
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 24px;
+  background-color: white;
+  flex-shrink: 0; /* Não permite encolhimento */
 }
 
+/* Texto do tempo */
+.tempo p,
+.tempo span {
+  font-size: clamp(16px, 3vw, 20px); /* Responsivo */
+  margin: 0;
+}
+
+/* Coluna de imagem */
 .retiradas-entregas .imagem {
-  flex: 1;
-  max-width: 800px;
+  flex: 1 1 400px; /* Flexível com base mínima */
+  max-width: 600px;
+  min-width: 300px;
 }
 
+/* Imagem responsiva */
 .retiradas-entregas .imagem img {
   width: 100%;
   height: auto;
-  border-radius: 8px;
+  border-radius: 12px; /* Bordas arredondadas */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Sombra suave */
+  object-fit: cover;
 }
 
 /* ============================================
-   FOOTER
+   FOOTER (RODAPÉ)
    ============================================ */
+/* Container principal do footer */
 .final {
-  background-color: var(--FundoClaro);
+  background-color: var(--CorPrincipal);
   display: flex;
   justify-content: space-around;
-  align-items: center;
+  align-items: flex-start; /* Alinha ao topo */
+  padding: 40px 20px;
+  flex-wrap: wrap; /* Permite quebra em telas menores */
 }
 
-.final,
-.grid-pedidos,
+/* Grid de colunas do footer */
+.grid-pedidos {
+  background-color: var(--CorPrincipal);
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Cada coluna individual do footer */
 .coluna {
   background-color: var(--CorPrincipal);
+  flex: 1 1 250px; /* Flexível com base mínima */
+  min-width: 200px;
+  padding: 20px;
 }
 
+/* Títulos e textos dentro das colunas */
 .coluna h2,
 .coluna p,
 .coluna ul,
@@ -481,310 +693,445 @@ textarea {
   background-color: var(--CorPrincipal);
 }
 
-.coluna img {
-  width: 60px;
-  height: 60px;
-  background-color: transparent;
+/* Títulos das colunas */
+.coluna h2 {
+  font-size: clamp(18px, 3vw, 22px); /* Responsivo */
+  margin-bottom: 15px;
+  color: var(--CorTercearia);
 }
 
+/* Parágrafos nas colunas */
+.coluna p {
+  font-size: clamp(14px, 2.5vw, 16px); /* Responsivo */
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+/* Links nas colunas */
+.coluna a:hover {
+  color: #ff7f50; /* Cor laranja no hover */
+  text-decoration: underline;
+}
+
+/* Listas do footer */
+.coluna ul {
+  list-style: none;
+  padding: 0;
+}
+
+.coluna ul li {
+  margin: 8px 0;
+  padding-left: 0;
+}
+
+/* Imagens do footer (ícones de redes sociais) */
+.coluna img,
 .img-footer {
-  height: var(--heightImg);
-  width: var(--widthImg);
+  width: 40px; /* Reduzido para melhor responsividade */
+  height: 40px;
+  background-color: transparent;
+  object-fit: contain;
+  transition: transform 0.3s ease;
 }
 
+/* Efeito hover nas imagens */
+.coluna img:hover,
+.img-footer:hover {
+  transform: scale(1.1); /* Aumenta ligeiramente */
+}
+
+/* Endereço no footer */
 address,
 address h2,
 address p {
   background-color: var(--CorPrincipal);
+  font-style: normal; /* Remove itálico padrão do address */
 }
 
+/* Mapa do Google (iframe) */
 iframe {
   border-radius: 15px;
-  width: 300px;
-  height: 300px;
+  width: 100%;
+  max-width: 300px;
+  height: 250px; /* Altura ajustada */
   background-color: white;
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Seção de direitos autorais */
 .direitos {
   display: flex;
   justify-content: space-between;
   align-items: center;
   text-align: center;
   background-color: var(--FundoClaro);
-  padding: 15px 20px;
+  padding: 20px;
+  flex-wrap: wrap; /* Permite quebra */
+  gap: 15px;
 }
 
+/* Texto de direitos autorais */
 .direitos p {
   background-color: var(--FundoClaro);
+  font-size: clamp(12px, 2vw, 14px); /* Responsivo */
+  margin: 5px 0;
+  color: var(--CorSecundaria);
 }
 
 /* ============================================
-   RESPONSIVE - MOBILE
+   RESPONSIVIDADE - MOBILE (Smartphones)
    ============================================ */
 @media (max-width: 768px) {
-  /* NAVEGAÇÃO */
+  /* NAVEGAÇÃO MOBILE */
   nav {
     padding: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); /* Sombra mais pronunciada */
   }
 
+  /* Menu empilhado verticalmente em telas pequenas */
   nav ul {
     flex-direction: column;
     text-align: center;
     padding: 10px 0;
-    gap: 10px;
+    gap: 5px;
   }
 
+  /* Itens do menu com mais espaçamento */
   nav ul li {
-    margin: 5px 0;
+    margin: 8px 0;
+    width: 100%; /* Ocupa largura total */
   }
 
+  /* Links do menu com área clicável maior */
   nav ul li a:not(.logo-header) {
     display: block;
-    padding: 5px;
+    padding: 10px 15px;
+    width: 100%;
   }
 
+  /* Logo com espaçamento inferior */
   .logo-header,
   #logo-header {
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    width: 50px; /* Reduz tamanho em mobile */
+    height: 50px;
   }
 
   /* CONTEÚDO PRINCIPAL */
+  /* Aumenta margem superior para compensar menu expandido */
   main {
-    margin-top: 180px;
-    padding: 10px;
-    padding-top: 10px;
+    margin-top: 220px; /* Ajustado para menu vertical */
+    padding: 15px 10px;
   }
 
-  /* HOME */
+  /* PÁGINA INICIAL (HOME) */
+  /* Seção "Sobre" */
+  .sobre {
+    padding: 30px 15px;
+  }
+
   .sobre h1 {
-    font-size: 2em;
+    font-size: 1.8em;
+    margin-bottom: 15px;
   }
 
   .sobre h2,
   .sobre p {
     text-align: center;
     padding: 0 10px;
+    margin-bottom: 15px;
   }
 
-  /* CARROSSEL */
+  /* CARROSSEL - Ajustes para mobile */
   .carrossel-container {
     max-width: 100%;
+    border-radius: 8px; /* Bordas menos arredondadas em mobile */
   }
 
   .slide img {
     width: 100%;
     height: auto;
+    max-width: 100%; /* Garante que não ultrapasse */
   }
 
   .mvv {
-    padding: 20px 0;
+    padding: 30px 15px; /* Reduz padding em mobile */
   }
 
-  /* OS MAIS PEDIDOS */
+  /* OS MAIS PEDIDOS - Layout mobile */
+  .mais-pedidos {
+    padding: 30px 15px;
+  }
+
   .mais-pedidos h2 {
-    font-size: 28px;
+    font-size: 24px;
+    margin-bottom: 25px;
   }
 
+  /* Grid de pedidos em coluna única */
+  .grid-pedidos {
+    gap: 20px;
+    padding: 20px 10px;
+  }
+
+  /* Itens menores em mobile */
   .item {
     flex-direction: row;
     align-items: center;
+    gap: 12px;
+    padding-bottom: 12px;
+    margin-bottom: 15px;
   }
 
   .item img {
-    width: 50px;
-    height: 50px;
+    width: 60px; /* Tamanho médio para mobile */
+    height: 60px;
   }
 
   .item h3 {
-    font-size: 16px;
+    font-size: 15px;
   }
 
   .item p {
-    font-size: 12px;
+    font-size: 13px;
   }
 
+  /* Botão adaptado para mobile */
   .botao-cardapio {
-    padding: 10px 20px;
-    font-size: 14px;
+    padding: 12px 25px;
+    font-size: 15px;
+    width: 90%; /* Quase largura total */
+    max-width: 300px;
+    margin: 20px auto; /* Centraliza */
+    display: block;
   }
 
-  /* BANNERS */
+  /* BANNERS - Altura reduzida em mobile */
   .banner-contato,
   .banner-encomenda {
-    height: 250px;
+    height: 200px; /* Mais compacto em mobile */
+    background-attachment: scroll; /* Remove parallax em mobile para performance */
   }
 
-  .banner-contato h1 {
-    font-size: 3em;
+  .banner-contato h1,
+  .banner-encomenda h1 {
+    font-size: 2em; /* Reduz título */
+    padding: 0 15px;
   }
 
   .banner-encomenda h2 {
-    font-size: 1.8em;
+    font-size: 1.5em;
   }
 
   .banner-encomenda p {
-    font-size: 1em;
-    padding: 0 10px;
+    font-size: 0.9em;
+    padding: 0 15px;
   }
 
-  /* BUSCA */
+  /* CAMPO DE BUSCA - Mobile */
   .busca-container {
-    padding: 20px 10px 10px;
+    padding: 25px 15px 15px;
   }
 
   #campoBusca {
     padding: 12px 18px;
     font-size: 1em;
+    max-width: 100%; /* Largura total em mobile */
   }
 
-  /* CARDÁPIO */
+  /* CARDÁPIO - Grid adaptado para mobile */
   .cardapio {
-    flex-direction: column;
-    padding: 10px;
-    align-items: center;
+    grid-template-columns: 1fr; /* Uma coluna em mobile */
+    padding: 20px 10px;
+    gap: 20px;
   }
 
+  /* Cards de doces menores em mobile */
   .doce {
-    width: 95%;
-    max-width: 350px;
-    margin: 10px 0;
+    width: 100%;
+    max-width: 400px; /* Largura máxima aumentada */
+    margin: 0 auto;
     padding: 15px;
   }
 
+  .doce img {
+    height: 180px; /* Altura reduzida em mobile */
+  }
+
   .doce h3 {
-    font-size: 1.3em;
+    font-size: 1.2em;
   }
 
   .doce p {
-    font-size: 0.9em;
+    font-size: 0.95em;
   }
 
-  /* CONTATO */
+  /* PÁGINA CONTATO - Layout empilhado em mobile */
   .container-contato {
     flex-direction: column;
-    padding: 40px 20px;
+    padding: 30px 15px;
+    gap: 40px;
   }
 
+  /* Colunas ocupam largura total */
   .contato-esquerda,
   .contato-direita {
     width: 100%;
     padding: 0;
+    min-width: auto; /* Remove min-width */
   }
 
+  /* Títulos centralizados em mobile */
   .contato-esquerda h2 {
-    font-size: 28px;
+    font-size: 26px;
     margin-bottom: 15px;
     text-align: center;
   }
 
   .contato-esquerda p {
-    font-size: 16px;
+    font-size: 15px;
     margin-bottom: 20px;
     text-align: center;
   }
 
+  /* Itens de informação centralizados */
   .info-item {
-    margin-bottom: 30px;
-    justify-content: center;
+    margin-bottom: 25px;
+    justify-content: flex-start; /* Alinha à esquerda em mobile */
     text-align: left;
   }
 
   .info-item .icone img {
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
   }
 
+  /* Formulário - campos empilhados */
   .duas-colunas {
     flex-direction: column;
-    gap: 15px;
+    gap: 20px;
   }
 
   .campo {
     width: 100%;
   }
 
+  /* Botão de enviar adaptado */
   .btn-enviar {
-    padding: 15px;
+    padding: 14px 20px;
     font-size: 16px;
+    max-width: 100%; /* Largura total em mobile */
+    align-self: stretch; /* Estica para ocupar largura */
   }
 
-  /* ENTREGAS */
+  /* PÁGINA ENTREGAS - Layout empilhado em mobile */
   .retiradas-entregas {
     flex-direction: column;
     text-align: center;
-    padding: 30px 10px;
-    gap: 20px;
+    padding: 30px 15px;
+    gap: 30px;
   }
 
+  /* Texto ocupa largura total */
   .retiradas-entregas .texto {
     max-width: 100%;
-    padding: 0 10px;
+    padding: 0;
+    min-width: auto;
   }
 
+  /* Título menor em mobile */
   .retiradas-entregas h1 {
-    font-size: 32px;
+    font-size: 28px;
+    margin-bottom: 20px;
   }
 
+  /* Subtítulos alinhados à esquerda */
   .retiradas-entregas h3 {
     text-align: left;
-    margin-top: 15px;
+    margin-top: 20px;
+    font-size: 18px;
   }
 
+  /* Parágrafos alinhados à esquerda */
   .retiradas-entregas p {
     text-align: left;
-    font-size: 16px;
+    font-size: 15px;
   }
 
+  /* Container de tempo adaptado */
   .tempo {
-    justify-content: center;
-    font-size: 1em;
-    margin-top: 30px;
+    justify-content: flex-start; /* Alinha à esquerda */
+    font-size: 0.95em;
+    margin-top: 25px;
+    padding: 15px;
   }
 
+  .tempo .icon {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+  }
+
+  /* Imagem responsiva em mobile */
   .retiradas-entregas .imagem {
     max-width: 100%;
+    min-width: auto;
   }
 
   .retiradas-entregas .imagem img {
-    width: 95%;
+    width: 100%;
     height: auto;
-    margin: 20px auto;
+    margin: 20px 0;
     display: block;
+    border-radius: 10px;
   }
 
-  /* FOOTER */
+  /* FOOTER - Layout empilhado em mobile */
   .final {
     flex-direction: column;
-    padding: 20px 10px;
+    padding: 30px 15px;
+    align-items: center;
   }
 
+  /* Grid de colunas empilhado */
   .final .grid-pedidos {
     flex-direction: column;
-    gap: 40px;
+    gap: 35px;
+    padding: 20px 0;
   }
 
   .grid-pedidos {
     flex-direction: column;
-    gap: 30px;
+    gap: 35px;
     padding: 20px 10px;
     align-items: center;
   }
 
+  /* Colunas do footer centralizadas */
   .coluna {
     width: 100%;
-    max-width: 400px;
+    max-width: 350px;
     margin: 0 auto;
     text-align: center;
+    padding: 15px;
+    min-width: auto;
   }
 
   .final .coluna {
     width: 100%;
-    max-width: 400px;
+    max-width: 350px;
     text-align: center;
   }
 
+  /* Endereço centralizado */
   .final .coluna address {
     text-align: center;
+  }
+
+  .coluna h2 {
+    font-size: 20px;
+    margin-bottom: 12px;
   }
 
   .coluna h2,
@@ -793,9 +1140,11 @@ iframe {
     text-align: center;
   }
 
+  /* Listas do footer */
   .final .coluna ul {
     display: block;
     padding: 0;
+    list-style: none;
   }
 
   .coluna ul {
@@ -803,40 +1152,153 @@ iframe {
   }
 
   .final .coluna ul li {
-    margin: 10px 0;
+    margin: 12px 0;
   }
 
   .coluna ul li {
-    margin: 5px 0;
+    margin: 8px 0;
   }
 
+  /* Mapa responsivo em mobile */
   iframe {
     width: 100%;
-    height: 200px;
+    max-width: 350px;
+    height: 220px;
   }
 
+  /* Direitos autorais empilhados */
   .direitos {
     flex-direction: column;
     text-align: center;
-    padding: 10px;
+    padding: 15px 10px;
+    gap: 10px;
   }
 
   .direitos p {
     margin: 5px 0;
-    font-size: 0.8em;
+    font-size: 0.85em;
   }
 }
 
 /* ============================================
-   RESPONSIVE - TABLET & LARGER SCREENS
+   RESPONSIVIDADE - TABLET (Dispositivos médios)
+   ============================================ */
+@media (min-width: 769px) and (max-width: 1024px) {
+  /* NAVEGAÇÃO - Ajustes para tablets */
+  nav ul {
+    gap: 15px;
+    padding: 0 15px;
+  }
+
+  /* CONTEÚDO PRINCIPAL */
+  main {
+    padding: 25px 30px;
+  }
+
+  /* GRID DE CARDÁPIO - 2 colunas em tablets */
+  .cardapio {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    padding: 30px 20px;
+  }
+
+  /* CONTATO - Mantém 2 colunas mas mais estreitas */
+  .container-contato {
+    gap: 40px;
+    padding: 50px 30px;
+  }
+
+  .contato-esquerda,
+  .contato-direita {
+    flex: 1 1 350px;
+  }
+
+  /* ENTREGAS - Layout de 2 colunas ajustado */
+  .retiradas-entregas {
+    gap: 30px;
+    padding: 50px 30px;
+  }
+
+  /* FOOTER - 2 colunas em tablets */
+  .grid-pedidos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+
+  .coluna {
+    max-width: 100%;
+  }
+}
+
+/* ============================================
+   RESPONSIVIDADE - TELAS MÉDIAS
    ============================================ */
 @media (max-width: 900px) {
+  /* Ajuste para página de entregas em telas médias */
   .retiradas-entregas {
     flex-direction: column;
     text-align: center;
+    padding: 40px 25px;
   }
 
   .tempo {
     justify-content: center;
   }
+
+  /* Grid de produtos - ajuste para 2 colunas */
+  .grid-pedidos {
+    gap: 30px;
+  }
+
+  .coluna {
+    flex: 1 1 280px;
+  }
+}
+
+/* ============================================
+   RESPONSIVIDADE - TELAS GRANDES
+   ============================================ */
+@media (min-width: 1025px) {
+  /* CARDÁPIO - 3 ou 4 colunas em telas grandes */
+  .cardapio {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  /* Container principal com largura máxima */
+  .container-contato,
+  .retiradas-entregas {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  /* Footer com até 4 colunas */
+  .grid-pedidos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+}
+
+/* ============================================
+   UTILITÁRIOS - ACESSIBILIDADE E PERFORMANCE
+   ============================================ */
+/* Reduz movimento para usuários que preferem */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Melhora contraste para modo escuro do sistema */
+@media (prefers-color-scheme: dark) {
+  /* Você pode adicionar estilos para modo escuro aqui no futuro */
 }
