@@ -1308,13 +1308,9 @@ textarea {
 /* Container principal - layout de 2 colunas */
 .container-trabalhe {
   display: flex;
-  justify-content: center;
-  gap: 60px;
+  flex-direction: column;
+  align-items: center;
   padding: 60px 20px;
-  /* Padding responsivo */
-  flex-wrap: wrap;
-  /* Permite quebra em telas menores */
-  max-width: 1200px;
   margin-top: 70px;
 }
 
@@ -1391,15 +1387,6 @@ form {
   gap: 20px;
   flex-wrap: wrap;
   /* Quebra em telas pequenas */
-}
-
-/* Campo individual do formulário */
-.campo {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  min-width: 0;
-  /* Permite encolhimento */
 }
 
 /* Label do campo */
@@ -2023,4 +2010,103 @@ footer {
 /* Melhora contraste para modo escuro do sistema */
 @media (prefers-color-scheme: dark) {
   /* Você pode adicionar estilos para modo escuro aqui no futuro */
+}
+
+/* ============================================
+   ESTILOS PARA A PÁGINA TRABALHE
+   ============================================ */
+.trabalhe-form .duas-colunas {
+  display: flex;
+  gap: 30px;
+  align-items: stretch;
+  width: 100%;
+}
+
+.trabalhe-form .duas-colunas>.col-left,
+.trabalhe-form .duas-colunas>.col-right {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 10px;
+}
+
+.trabalhe-form .campo {
+  width: 100%;
+  max-width: 520px;
+}
+
+.trabalhe-form .campo label {
+  display: block;
+  text-align: left;
+  margin-bottom: 8px;
+}
+
+.trabalhe-form .campo input,
+.trabalhe-form .campo textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.trabalhe-form .curriculo-full {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 18px;
+}
+
+.trabalhe-form .curriculo-full .campo {
+  max-width: 1200px;
+  width: 100%;
+  padding: 0 10px;
+}
+
+.trabalhe-form .form-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 18px;
+}
+
+@media (max-width: 768px) {
+  .trabalhe-form .duas-colunas {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .trabalhe-form .campo {
+    max-width: 100%;
+  }
+}
+
+.trabalhe-top {
+  text-align: center;
+  width: 100%;
+  max-width: 900px;
+  margin-bottom: 28px;
+}
+
+.trabalhe-top h2 {
+  margin-bottom: 8px;
+}
+
+.trabalhe-top p {
+  margin: 0 auto;
+  color: var(--CorSecundaria);
+}
+
+.trabalhe-form {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.trabalhe-form .duas-colunas>.col-left,
+.trabalhe-form .duas-colunas>.col-right {
+  align-items: center;
+}
+
+.trabalhe-form .campo input[type="file"] {
+  width: auto;
 }

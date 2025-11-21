@@ -43,20 +43,19 @@
   </header>
 
   <section class="container-trabalhe">
-    <div class="trabalhe-esquerda">
+    <!-- Texto superior centralizado -->
+    <div class="trabalhe-top">
       <h2>FAÇA PARTE DA NOSSA EQUIPE</h2>
-      <br>
-
       <p>
-        Em busca de uma vaga na Hapuque's Doces? <br />
-        Preencha todos os campos ao lado e nos envie o seu currículo. <br />
+        Em busca de uma vaga na Hapuque's Doces? Preencha os campos abaixo e nos envie o seu currículo.
       </p>
-
     </div>
 
-    <div class="trabalhe-direita">
-      <form>
-        <div class="duas-colunas">
+    <!-- Formulário com duas colunas -->
+    <form class="trabalhe-form">
+      <div class="duas-colunas">
+        <!-- Coluna A: Primeiro nome, Último nome, E-mail -->
+        <div class="col-left">
           <div class="campo">
             <label>Primeiro nome*</label>
             <input type="text" placeholder="" />
@@ -66,33 +65,38 @@
             <label>Último nome*</label>
             <input type="text" placeholder="" />
           </div>
+
+          <div class="campo">
+            <label>E-mail*</label>
+            <input type="email" placeholder="" />
+          </div>
+
+          <div class="campo">
+            <label>Telefone*</label>
+            <input type="tel" placeholder="(11) 9xxxx-xxxx" />
+          </div>
         </div>
 
-        <div class="campo">
-          <label>E-mail*</label>
-          <input type="email" placeholder="" />
-        </div>
+        <!-- Coluna B: Telefone, Mensagem -->
+        <div class="col-right">
+          <div class="campo">
+            <label>Currículo*</label>
+            <input type="file" />
+          </div>
 
-        <div class="campo">
-          <label>Telefone*</label>
-          <input type="tel" placeholder="Telefone" />
+          <div class="campo">
+            <label>Mensagem</label>
+            <textarea placeholder="Escreva uma breve mensagem"></textarea>
+          </div>
         </div>
+      </div>
 
-        <div class="campo">
-          <label>Curriculo*</label>
-          <input type="file" />
-        </div>
-
-        <div class="campo">
-          <label>Mensagem</label>
-          <textarea></textarea>
-        </div>
-
+      <div class="form-actions">
         <button class="btn-enviar">ENVIAR</button>
-      </form>
-    </div>
+      </div>
+    </form>
   </section>
-  </main>
+  
 
   <footer>
     <div class="footer-content">
