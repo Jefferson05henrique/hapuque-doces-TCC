@@ -1814,6 +1814,36 @@ footer {
   }
 }
 
+/* Ajustes finos para dispositivos muito pequenos (<=360px) */
+@media (max-width: 360px) {
+  /* Reduz espaço do header para ganhar área útil */
+  main { margin-top: 60px; }
+
+  /* Banners mais compactos */
+  .banner-contato,
+  .banner-encomenda { height: 150px; }
+  .banner-contato h1,
+  .banner-encomenda h1 { font-size: 1.6em; padding: 0 12px; }
+
+  /* Contato: aproximar informações e formulário */
+  .container-contato { padding: 10px 8px; gap: 8px; }
+  .contato-esquerda { flex: 1 1 180px; }
+  .contato-direita { flex: 1 1 220px; }
+  .contato-esquerda h2 { font-size: 20px; margin-bottom: 8px; }
+  .contato-esquerda p { margin-bottom: 8px; }
+  .contato-esquerda .info-item { margin-bottom: 6px; gap: 12px; }
+
+  /* Formulário mais compacto */
+  .contato-direita form { gap: 8px; }
+  .duas-colunas { gap: 8px; }
+  textarea { min-height: 120px; }
+  .btn-enviar { padding: 12px 14px; font-size: 15px; }
+
+  /* Entregas/imagens e outras colunas empilhadas com menos gap */
+  .retiradas-entregas { padding: 12px 8px; gap: 10px; }
+  .retiradas-entregas .imagem { flex: 1 1 180px; }
+}
+
 /* ============================================
    RESPONSIVIDADE - TABLET (Dispositivos médios)
    ============================================ */
