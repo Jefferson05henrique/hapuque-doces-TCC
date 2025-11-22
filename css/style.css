@@ -1812,6 +1812,33 @@ footer {
     margin: 5px 0;
     font-size: 0.85em;
   }
+
+  /* FOOTER - overrides apenas para mobile (<=768px) */
+  footer {
+    /* Mantém a identidade visual, mas aumenta levemente contraste no mobile */
+    background: linear-gradient(135deg,
+        rgba(65, 45, 36, 0.98) 0%,
+        rgba(102, 103, 102, 0.98) 100%);
+    color: #fff;
+  }
+
+  .footer-column p,
+  .footer-links,
+  .footer-bottom p {
+    color: rgba(255, 255, 255, 0.95) !important;
+  }
+
+  /* Links do rodapé com alto contraste e sem sublinhado */
+  .footer-links a,
+  .footer-column a {
+    color: rgba(255, 255, 255, 0.95) !important;
+    text-decoration: none;
+  }
+
+  /* Atenua a linha superior que aparecia como traço em telas pequenas */
+  .footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+  }
 }
 
 /* Ajustes finos para dispositivos muito pequenos (<=360px) */
@@ -1842,6 +1869,28 @@ footer {
   /* Entregas/imagens e outras colunas empilhadas com menos gap */
   .retiradas-entregas { padding: 12px 8px; gap: 10px; }
   .retiradas-entregas .imagem { flex: 1 1 180px; }
+}
+
+/* Ajustes adicionais muito específicos para dispositivos <=360px (footer) */
+@media (max-width: 360px) {
+  /* Torna o fundo do footer um pouco menos denso em telas muito pequenas */
+  footer {
+    background: linear-gradient(135deg,
+        rgba(65, 45, 36, 0.92) 0%,
+        rgba(102, 103, 102, 0.92) 100%);
+  }
+
+  /* Remove totalmente a borda superior para evitar qualquer traço visível */
+  .footer-bottom {
+    border-top: none !important;
+    padding-top: 10px;
+  }
+
+  /* Garante que links fiquem bem visíveis em telas muito pequenas */
+  .footer-links a,
+  .footer-column a {
+    color: #ffffff !important;
+  }
 }
 
 /* ============================================
