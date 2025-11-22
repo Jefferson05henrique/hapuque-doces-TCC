@@ -1655,8 +1655,8 @@ footer {
   /* PÁGINA CONTATO - Layout empilhado em mobile */
   .container-contato {
     flex-direction: column;
-    padding: 30px 15px;
-    gap: 40px;
+    padding: 14px 10px;
+    gap: 12px;
   }
 
   /* Colunas ocupam largura total */
@@ -1665,19 +1665,20 @@ footer {
     width: 100%;
     padding: 0;
     min-width: auto;
+    flex: 1 1 200px;
     /* Remove min-width */
   }
 
   /* Títulos centralizados em mobile */
   .contato-esquerda h2 {
     font-size: 26px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     text-align: center;
   }
 
   .contato-esquerda p {
     font-size: 15px;
-    margin-bottom: 20px;
+    margin-bottom: 12px;
     text-align: left;
   }
 
@@ -1694,14 +1695,28 @@ footer {
     height: 45px;
   }
 
+  /* Reduz margem entre os itens de contato para aproximar do formulário */
+  .contato-esquerda .info-item {
+    margin-bottom: 8px;
+  }
+
+  .contato-esquerda .info-item:last-child {
+    margin-bottom: 6px;
+  }
+
   /* Formulário - campos empilhados */
   .duas-colunas {
     flex-direction: column;
-    gap: 20px;
+    gap: 14px;
   }
 
   .campo {
     width: 100%;
+  }
+
+  /* Reduz espaço entre linhas do formulário apenas em telas pequenas */
+  .contato-direita form {
+    gap: 12px;
   }
 
   /* Botão de enviar adaptado */
@@ -1767,6 +1782,7 @@ footer {
   .retiradas-entregas .imagem {
     max-width: 100%;
     min-width: auto;
+    flex: 1 1 200px;
   }
 
   .retiradas-entregas .imagem img {
