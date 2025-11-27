@@ -76,5 +76,44 @@ function removerItem(id) {
     // Se estiver na página do carrinho, renderiza novamente
     if (document.getElementById('lista-carrinho')) {
         renderizarCarrinho();
+        // Re-adiciona listeners após renderizar
+        if (typeof setupCarrinhoEventListeners === 'function') {
+            setupCarrinhoEventListeners();
+        }
     }
+}
+
+// Função para adicionar o produto (configurado no modal) ao carrinho
+function adicionarProdutoAoCarrinho() {
+    const btn = document.getElementById('btn-adicionar');
+    if (!btn) return;
+
+    const id = btn.getAttribute('data-produto-id');
+    const nome = btn.getAttribute('data-produto-nome');
+    const preco = parseFloat(btn.getAttribute('data-produto-preco'));
+    const imagem = btn.getAttribute('data-produto-imagem');
+    const quantidade = parseInt(document.getElementById('quantidade').value) || 1;
+
+    if (!id || !nome || isNaN(preco)) {
+        alert('Dados do produto inválidos. Tente novamente.');
+        return;
+    }
+
+    let carrinho = getCarrinho();
+    const existente = carrinho.find(item => item.id === id);
+
+    if (existente) {
+        existente.quantidade += quantidade;
+    } else {
+        carrinho.push({ id, nome, preco, imagem, quantidade });
+    }
+
+    saveCarrinho(carrinho);
+
+    // Fecha o modal e atualiza a página do carrinho caso esteja aberta
+    fecharModal();
+    try { renderizarCarrinho(); } catch (e) { /* página atual pode não ter a função */ }
+
+    // Feedback simples ao usuário
+    alert(`${quantidade} x ${nome} adicionado(s) ao carrinho.`);
 }

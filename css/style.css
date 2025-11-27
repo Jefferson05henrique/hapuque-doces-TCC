@@ -1592,9 +1592,300 @@ footer {
     width: 35px;
 }
 
+/* RESPONSIVO: BOTÃO WHATSAPP */
+@media (max-width: 768px) {
+  .JoinChat {
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .JoinChat-button {
+    width: 55px;
+    height: 55px;
+  }
+
+  .JoinChat-button img {
+    width: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .JoinChat {
+    bottom: 16px;
+    right: 16px;
+  }
+
+  .JoinChat-button {
+    width: 50px;
+    height: 50px;
+  }
+
+  .JoinChat-button img {
+    width: 28px;
+  }
+}
+
+@media (max-width: 360px) {
+  .JoinChat {
+    bottom: 12px;
+    right: 12px;
+  }
+
+  .JoinChat-button {
+    width: 45px;
+    height: 45px;
+  }
+
+  .JoinChat-button img {
+    width: 24px;
+  }
+}
+
 
 
 /* BOTÃO WHATSAPP */
+
+
+/* ============================================
+   PÁGINA CARRINHO
+   ============================================ */
+/* Container principal da página do carrinho */
+.carrinho-page {
+  padding: 60px 20px;
+  background-color: var(--CorPrincipal);
+  min-height: calc(100vh - 80px);
+}
+
+/* Título da página do carrinho */
+.carrinho-page > h1 {
+  text-align: center;
+  font-size: clamp(32px, 6vw, 48px);
+  margin-bottom: 50px;
+  color: var(--CorTercearia);
+  font-weight: 600;
+}
+
+/* Container da lista de itens do carrinho */
+.lista-carrinho-container {
+  max-width: 1000px;
+  margin: 0 auto 40px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+/* Card individual do item no carrinho */
+.carrinho-item {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+/* Efeito hover no card do carrinho */
+.carrinho-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Imagem do produto no carrinho */
+.carrinho-item img {
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+/* Container de detalhes do produto */
+.item-detalhes {
+  flex: 1;
+}
+
+/* Título do produto no carrinho */
+.item-detalhes h3 {
+  margin: 0 0 8px;
+  font-size: clamp(18px, 3vw, 22px);
+  color: var(--CorTercearia);
+  font-weight: 600;
+}
+
+/* Parágrafos de informação (preço, subtotal) */
+.item-detalhes p {
+  margin: 5px 0;
+  font-size: clamp(14px, 2vw, 16px);
+  color: var(--CorSecundaria);
+}
+
+/* Container das ações do item (quantidade e remover) */
+.item-acoes {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* Container de entrada de quantidade */
+.quantidade-input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--FundoClaro);
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #e0c5c5;
+}
+
+/* Botões de incremento/decremento */
+.quantidade-input button {
+  background: var(--CorTercearia);
+  color: white;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 18px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hover nos botões de quantidade */
+.quantidade-input button:hover {
+  background: var(--CorSecundaria);
+  transform: scale(1.1);
+}
+
+/* Texto da quantidade */
+.quantidade-input span {
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--CorTercearia);
+  min-width: 30px;
+  text-align: center;
+}
+
+/* Botão de remover item */
+.btn-remover {
+  padding: 10px 20px;
+  background: #e9aaaa;
+  color: var(--CorTercearia);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: clamp(12px, 2vw, 14px);
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+/* Hover no botão remover */
+.btn-remover:hover {
+  background: #d89999;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Mensagem de carrinho vazio */
+#carrinho-vazio {
+  text-align: center;
+  padding: 60px 20px;
+  font-size: clamp(16px, 3vw, 18px);
+  color: var(--CorSecundaria);
+}
+
+#carrinho-vazio a {
+  color: var(--CorTercearia);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+/* Container do resumo/totais do carrinho */
+.resumo-carrinho {
+  max-width: 500px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Linha individual de resumo */
+.total-linha {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: clamp(16px, 2.5vw, 18px);
+  color: var(--CorSecundaria);
+}
+
+/* Linha com o total geral (destacada) */
+.total-linha.total-geral {
+  border-bottom: 2px solid var(--CorTercearia);
+  border-top: 2px solid var(--CorTercearia);
+  margin: 20px 0;
+  padding: 20px 0;
+  font-size: clamp(20px, 4vw, 26px);
+  color: var(--CorTercearia);
+}
+
+.total-linha.total-geral strong {
+  font-weight: 700;
+}
+
+/* Botão finalizar compra */
+#btn-finalizar {
+  padding: 16px;
+  background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+  color: var(--CorTercearia);
+  border: none;
+  border-radius: 50px;
+  font-size: clamp(14px, 2.5vw, 16px);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 6px 15px rgba(255, 154, 158, 0.3);
+}
+
+#btn-finalizar:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(255, 154, 158, 0.5);
+}
+
+/* Botão limpar carrinho */
+.btn-limpar-carrinho {
+  padding: 16px;
+  background: transparent;
+  color: var(--CorTercearia);
+  border: 2px solid #e9aaaa;
+  border-radius: 50px;
+  font-size: clamp(14px, 2.5vw, 16px);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.btn-limpar-carrinho:hover {
+  background: #e9aaaa;
+  color: white;
+  transform: translateY(-2px);
+}
 
 
 /* MODAL DO CARDÁPIO */
@@ -1818,6 +2109,84 @@ footer {
 
   .doce p {
     font-size: 0.95em;
+  }
+
+  /* PÁGINA CARRINHO - Mobile */
+  .carrinho-page {
+    padding: 40px 15px;
+  }
+
+  .carrinho-page > h1 {
+    margin-bottom: 30px;
+    font-size: 28px;
+  }
+
+  .lista-carrinho-container {
+    gap: 15px;
+    margin-bottom: 30px;
+  }
+
+  .carrinho-item {
+    flex-direction: column;
+    text-align: center;
+    padding: 15px;
+    gap: 15px;
+  }
+
+  .carrinho-item img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .item-detalhes h3 {
+    font-size: 16px;
+  }
+
+  .item-detalhes p {
+    font-size: 13px;
+  }
+
+  .item-acoes {
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .quantidade-input {
+    padding: 6px 10px;
+  }
+
+  .quantidade-input button {
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
+  }
+
+  .btn-remover {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+
+  .resumo-carrinho {
+    max-width: 100%;
+    padding: 20px;
+  }
+
+  .total-linha {
+    padding: 12px 0;
+    font-size: 14px;
+  }
+
+  .total-linha.total-geral {
+    font-size: 18px;
+    padding: 15px 0;
+  }
+
+  #btn-finalizar,
+  .btn-limpar-carrinho {
+    padding: 14px;
+    font-size: 13px;
   }
 
   /* PÁGINA CONTATO - Layout empilhado em mobile */
@@ -2127,6 +2496,15 @@ footer {
   .contato-esquerda,
   .contato-direita {
     flex: 1 1 350px;
+  }
+
+  /* CARRINHO - Tablet */
+  .carrinho-page {
+    padding: 50px 30px;
+  }
+
+  .resumo-carrinho {
+    max-width: 600px;
   }
 
   /* ENTREGAS - Layout de 2 colunas ajustado */

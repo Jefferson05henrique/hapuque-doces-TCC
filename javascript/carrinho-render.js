@@ -28,6 +28,7 @@ function renderizarCarrinho() {
             // 3. Cria o HTML para CADA item do carrinho
             const itemDiv = document.createElement('div');
             itemDiv.classList.add('carrinho-item');
+            itemDiv.setAttribute('data-produto-id', item.id);
             itemDiv.innerHTML = `
                 <img src="${item.imagem}" alt="${item.nome}" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px;" />
                 <div class="item-detalhes">
@@ -37,11 +38,11 @@ function renderizarCarrinho() {
                 </div>
                 <div class="item-acoes">
                     <div class="quantidade-input">
-                        <button onclick="mudarQuantidade('${item.id}', -1)">-</button>
-                        <span>${item.quantidade}</span>
-                        <button onclick="mudarQuantidade('${item.id}', 1)">+</button>
+                        <button class="btn-menos" data-id="${item.id}" type="button">-</button>
+                        <span class="quantidade-valor">${item.quantidade}</span>
+                        <button class="btn-mais" data-id="${item.id}" type="button">+</button>
                     </div>
-                    <button class="btn-remover" onclick="removerItem('${item.id}')">
+                    <button class="btn-remover" data-id="${item.id}" type="button">
                         Remover
                     </button>
                 </div>
@@ -68,14 +69,56 @@ function mudarQuantidade(id, delta) {
         } else {
             saveCarrinho(carrinho);
             renderizarCarrinho();
+            setupCarrinhoEventListeners(); // Re-adiciona listeners após renderizar
         }
     }
 }
+
+// Setup dos event listeners - executado APÓS o DOM estar pronto
+function setupCarrinhoEventListeners() {
+    const listaEl = document.getElementById('lista-carrinho');
+    
+    if (!listaEl) return;
+
+    // Delegação de eventos para +/- e remover
+    listaEl.removeEventListener('click', handleCarrinhoClick); // Remove listener antigo se existir
+    listaEl.addEventListener('click', handleCarrinhoClick);
+}
+
+// Handler de cliques - função separada para facilitar remover/readicionar
+function handleCarrinhoClick(e) {
+    const botao = e.target;
+    
+    if (!botao.classList) return;
+    
+    const id = botao.getAttribute('data-id');
+    
+    if (!id) return;
+
+    if (botao.classList.contains('btn-mais')) {
+        e.preventDefault();
+        mudarQuantidade(id, 1);
+    } else if (botao.classList.contains('btn-menos')) {
+        e.preventDefault();
+        mudarQuantidade(id, -1);
+    } else if (botao.classList.contains('btn-remover')) {
+        e.preventDefault();
+        removerItem(id);
+    }
+}
+
+// CHAMA A FUNÇÃO DE RENDERIZAÇÃO AO CARREGAR A PÁGINA
+document.addEventListener('DOMContentLoaded', () => {
+    renderizarCarrinho();
+    setupCarrinhoEventListeners();
+});
+
 
 function limparCarrinho() {
     if (confirm("Tem certeza que deseja limpar todo o carrinho?")) {
         localStorage.removeItem('carrinhoHapuque');
         renderizarCarrinho();
+        setupCarrinhoEventListeners();
     }
 }
 
@@ -84,7 +127,3 @@ function finalizarCompra() {
     alert("Funcionalidade de Finalizar Compra será implementada aqui!");
     // Exemplo: window.location.href = 'checkout.html';
 }
-
-
-// CHAMA A FUNÇÃO DE RENDERIZAÇÃO AO CARREGAR A PÁGINA
-document.addEventListener('DOMContentLoaded', renderizarCarrinho);
