@@ -123,7 +123,60 @@ function limparCarrinho() {
 }
 
 function finalizarCompra() {
-    // Implementar a lógica de finalizar compra (Ex: Gerar link WhatsApp)
-    alert("Funcionalidade de Finalizar Compra será implementada aqui!");
-    // Exemplo: window.location.href = 'checkout.html';
+    // Lê o carrinho e valida
+    const carrinho = getCarrinho();
+
+    if (!carrinho || carrinho.length === 0) {
+        alert('Seu carrinho está vazio. Adicione produtos antes de finalizar a compra.');
+        return;
+    }
+
+    // Lê os dados do cliente do formulário (se presentes)
+    const nomeCliente = (document.getElementById('cliente-nome') && document.getElementById('cliente-nome').value.trim()) || '';
+    const telefoneCliente = (document.getElementById('cliente-telefone') && document.getElementById('cliente-telefone').value.trim()) || '';
+    const enderecoCliente = (document.getElementById('cliente-endereco') && document.getElementById('cliente-endereco').value.trim()) || '';
+
+    // Recomendamos pelo menos o nome e telefone (telefone opcional dependendo do fluxo)
+    if (!nomeCliente) {
+        if (!confirm('Você não informou seu nome. Deseja continuar mesmo assim?')) return;
+    }
+
+    // Monta linhas de itens e calcula total
+    let totalGeral = 0;
+    const linhas = carrinho.map(item => {
+        const subtotal = item.preco * item.quantidade;
+        totalGeral += subtotal;
+        return `${item.quantidade} x ${item.nome} - R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+    });
+
+    const dataPedido = new Date();
+    const pedidoId = `PED-${dataPedido.getFullYear()}${(dataPedido.getMonth()+1).toString().padStart(2,'0')}${dataPedido.getDate().toString().padStart(2,'0')}-${dataPedido.getHours().toString().padStart(2,'0')}${dataPedido.getMinutes().toString().padStart(2,'0')}${dataPedido.getSeconds().toString().padStart(2,'0')}`;
+
+    // Monta mensagem em texto simples e codifica no final
+    let mensagemTexto = `Olá, gostaria de fazer um pedido (${pedidoId})\n\n`;
+    linhas.forEach(l => { mensagemTexto += `${l}\n`; });
+    mensagemTexto += `\nTotal: R$ ${totalGeral.toFixed(2).replace('.', ',')}\n\n`;
+    if (nomeCliente) mensagemTexto += `Nome: ${nomeCliente}\n`;
+    if (telefoneCliente) mensagemTexto += `Telefone: ${telefoneCliente}\n`;
+    if (enderecoCliente) mensagemTexto += `Endereço: ${enderecoCliente}\n`;
+
+    // Obtém número do botão (data-whatsapp) ou usa fallback
+    const btn = document.getElementById('btn-finalizar');
+    const telefone = (btn && btn.getAttribute('data-whatsapp')) ? btn.getAttribute('data-whatsapp') : '5511940261055';
+
+    // Confirmação antes de abrir WhatsApp e limpar o carrinho
+    const confirmar = confirm('Abrir WhatsApp para finalizar o pedido? Ao confirmar, o carrinho será limpo localmente.');
+    if (!confirmar) return;
+
+    // Cria URL com encodeURIComponent
+    const url = `https://wa.me/${telefone}?text=${encodeURIComponent(mensagemTexto)}`;
+    window.open(url, '_blank');
+
+    // Limpa carrinho local e re-renderiza
+    localStorage.removeItem('carrinhoHapuque');
+    renderizarCarrinho();
+    setupCarrinhoEventListeners();
 }
+
+window.renderizarCarrinho = renderizarCarrinho;
+window.setupCarrinhoEventListeners = setupCarrinhoEventListeners;

@@ -23,6 +23,7 @@
           <li><a href="cardapio.html">CARDAPIO</a></li>
           <li><a href="entregas.html">ENTREGAS</a></li>
           <li><a href="contato.html">CONTATO</a></li>
+          <li><a href="carrinho.html">CARRINHO</a></li>
         </ul>
 
         <!-- Botão Hamburger (visível apenas no mobile) -->
@@ -39,6 +40,7 @@
         <li><a href="cardapio.html">CARDAPIO</a></li>
         <li><a href="entregas.html">ENTREGAS</a></li>
         <li><a href="contato.html">CONTATO</a></li>
+        <li><a href="carrinho.html">CARRINHO</a></li>
       </ul>
     </nav>
   </header>
@@ -69,9 +71,21 @@
                     <strong id="valor-total-carrinho">R$ 0,00</strong>
                 </div>
                 
-                <button id="btn-finalizar" class="btn-cardapio" onclick="finalizarCompra()">
-                    ✅ FINALIZAR COMPRA
-                </button>
+        <!-- Campos para dados do cliente (nome, telefone, endereço) -->
+        <div class="cliente-dados">
+          <label for="cliente-nome">Nome</label>
+          <input id="cliente-nome" type="text" placeholder="Seu nome" />
+
+          <label for="cliente-telefone">Telefone</label>
+          <input id="cliente-telefone" type="tel" placeholder="(11) 9xxxx-xxxx" />
+
+          <label for="cliente-endereco">Endereço (opcional)</label>
+          <input id="cliente-endereco" type="text" placeholder="Rua, nº, bairro" />
+        </div>
+
+        <button id="btn-finalizar" class="btn-cardapio" data-whatsapp="5511940261055" onclick="finalizarCompra()">
+          ✅ FINALIZAR COMPRA
+        </button>
                 <button id="btn-limpar" class="btn-limpar-carrinho" onclick="limparCarrinho()">
                     🗑️ LIMPAR CARRINHO
                 </button>
@@ -157,6 +171,7 @@
 
   <script src="../javascript/carrinho.js"></script>
   <script src="../javascript/carrinho-render.js"></script>
+  <script src="../javascript/menu.js"></script>
 
     <div id="footer-container"></div>
  <script>
