@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>HAPUQUE'S DOCES</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="./css/style.css" />
 </head>
 
 <body>
@@ -22,10 +22,10 @@
         <!-- Menu Desktop (visível em telas grandes) -->
         <ul class="menu-desktop">
           <li><a href="index.html">INICIO</a></li>
-          <li><a href="./cardapio.html">CARDAPIO</a></li>
-          <li><a href="./entregas.html">ENTREGAS</a></li>
-          <li><a href="./contato.html">CONTATO</a></li>
-          <li><a href="./carrinho.html">CARRINHO</a></li>
+          <li><a href="./html/cardapio.html">CARDAPIO</a></li>
+          <li><a href="./html/entregas.html">ENTREGAS</a></li>
+          <li><a href="./html/contato.html">CONTATO</a></li>
+          <li><a href="./html/carrinho.html">CARRINHO</a></li>
         </ul>
 
         <!-- Botão Hamburger (visível apenas no mobile) -->
@@ -39,13 +39,14 @@
       <!-- Menu Overlay Mobile -->
       <ul class="menu-overlay" id="menuOverlay">
         <li><a href="index.html">INICIO</a></li>
-        <li><a href="./cardapio.html">CARDAPIO</a></li>
-        <li><a href="./entregas.html">ENTREGAS</a></li>
-        <li><a href="./contato.html">CONTATO</a></li>
-        <li><a href="./carrinho.html">CARRINHO</a></li>
+        <li><a href="./html/cardapio.html">CARDAPIO</a></li>
+        <li><a href="./html/entregas.html">ENTREGAS</a></li>
+        <li><a href="./html/contato.html">CONTATO</a></li>
+        <li><a href="./html/carrinho.html">CARRINHO</a></li>
       </ul>
     </nav>
   </header>
+  
   <main>
     <section class="hapu-fullscreen">
       <div class="hapu-overlay"></div>
@@ -57,8 +58,8 @@
           Doces artesanais feitos com amor e tradição.
         </p>
         <div class="hapu-ctas">
-          <a href="html/cardapio.html" class="btn-primary">VER CARDÁPIO</a>
-          <a href="html/contato.html" class="btn-secondary">FAZER PEDIDO</a>
+          <a href="./html/cardapio.html" class="btn-primary">VER CARDÁPIO</a>
+          <a href="./html/contato.html" class="btn-secondary">FAZER PEDIDO</a>
         </div>
       </div>
       <div class="scroll-indicator">
@@ -208,7 +209,7 @@
       </div>
 
       <button class="btn-cardapio">
-        <a href="html/cardapio.html">📄 VER CARDAPIO COMPLETO</a>
+        <a href="./html/cardapio.html">📄 VER CARDAPIO COMPLETO</a>
       </button>
     </section>
   </main>
@@ -261,10 +262,10 @@
           </a>
         </div>
         <div class="footer-links">
-          <a href="html/cardapio.html">Cardápio</a> |
-          <a href="html/entregas.html">Entregas</a> |
-          <a href="html/trabalhe.html">Trabalhe Conosco</a> |
-          <a href="html/politica.html">Privacidade</a>
+          <a href="./html/cardapio.html">Cardápio</a> |
+          <a href="./html/entregas.html">Entregas</a> |
+          <a href="./html/trabalhe.html">Trabalhe Conosco</a> |
+          <a href="./html/politica.html">Privacidade</a>
         </div>
       </div>
     </div>
@@ -278,9 +279,9 @@
   <!-- jsPDF Library para geração de PDF -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-  <script src="javascript/menu.js"></script>
-  <script src="javascript/carrousel.js"></script>
-  <script src="javascript/pdf-generator.js"></script>
+  <script src="./javascript/menu.js"></script>
+  <script src="./javascript/carrousel.js"></script>
+  <script src="./javascript/pdf-generator.js"></script>
 
   <!-- Google Translate Widget -->
   <script type="text/javascript">
@@ -293,7 +294,7 @@
 
   <div id="footer-container"></div>
  <script>
-     fetch("/html/footer.html")
+     fetch("html/footer.html")
          .then(res => res.text())
          .then(html => {
              document.getElementById("footer-container").innerHTML = html;
