@@ -65,22 +65,24 @@ function getCarrinho() {
 // 2. SALVA NO LOCALSTORAGE (usada por outras funções de manipulação)
 function saveCarrinho(carrinho) {
     localStorage.setItem('carrinhoHapuque', JSON.stringify(carrinho));
+    // Dispara um evento customizado para notificar outros módulos que o carrinho foi atualizado
+    // Isso torna a UI reativa: qualquer listener pode reagir a mudanças sem depender de chamadas diretas
+    try {
+        document.dispatchEvent(new CustomEvent('carrinhoAtualizado', { detail: { carrinho } }));
+    } catch (e) {
+        // Em ambientes onde `document` não existe (testes fora do browser) falha silenciosamente
+        // Mantemos o salvamento no localStorage como a fonte da verdade.
+    }
 }
+
+// NO ARQUIVO: javascript/carrinho.js
 
 // 3. REMOVE UM ITEM (ou diminui a quantidade)
 function removerItem(id) {
     let carrinho = getCarrinho();
-    carrinho = carrinho.filter(item => item.id !== id);
+    // Normaliza tipos para evitar problemas entre string/number
+    carrinho = carrinho.filter(item => String(item.id) !== String(id));
     saveCarrinho(carrinho);
-    
-    // Se estiver na página do carrinho, renderiza novamente
-    if (document.getElementById('lista-carrinho')) {
-        renderizarCarrinho();
-        // Re-adiciona listeners após renderizar
-        if (typeof setupCarrinhoEventListeners === 'function') {
-            setupCarrinhoEventListeners();
-        }
-    }
 }
 
 // Função para adicionar o produto (configurado no modal) ao carrinho
@@ -112,8 +114,10 @@ function adicionarProdutoAoCarrinho() {
 
     // Fecha o modal e atualiza a página do carrinho caso esteja aberta
     fecharModal();
-    try { renderizarCarrinho(); } catch (e) { /* página atual pode não ter a função */ }
+    if (typeof renderizarCarrinho === 'function') {
+        renderizarCarrinho();
+    }
 
-    // Feedback simples ao usuário
+
     alert(`${quantidade} x ${nome} adicionado(s) ao carrinho.`);
 }

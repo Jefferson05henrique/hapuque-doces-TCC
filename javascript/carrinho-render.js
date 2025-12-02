@@ -59,56 +59,74 @@ function renderizarCarrinho() {
 // Função para mudar a quantidade (usa as funções de lógica do carrinho.js)
 function mudarQuantidade(id, delta) {
     let carrinho = getCarrinho();
-    const item = carrinho.find(i => i.id === id);
+    // Normaliza tipos para evitar problemas quando id vier como number ou string
+    const item = carrinho.find(i => String(i.id) === String(id));
 
     if (item) {
         item.quantidade += delta;
 
         if (item.quantidade < 1) {
-            removerItem(id);
+            // 1. Remove o item (somente lógica de dados)
+            removerItem(id); // Chama a função AGORA vazia de render em carrinho.js
         } else {
+            // 2. Salva a nova quantidade
             saveCarrinho(carrinho);
-            renderizarCarrinho();
-            setupCarrinhoEventListeners(); // Re-adiciona listeners após renderizar
         }
+        
+        // 3. AQUI ESTÁ A CHAVE: CHAMA A RENDERIZAÇÃO APÓS QUALQUER MUDANÇA (remove, aumenta ou diminui)
+        renderizarCarrinho();
+        setupCarrinhoEventListeners();
     }
 }
 
 // Setup dos event listeners - executado APÓS o DOM estar pronto
 function setupCarrinhoEventListeners() {
     const listaEl = document.getElementById('lista-carrinho');
-    
     if (!listaEl) return;
 
-    // Delegação de eventos para +/- e remover
-    listaEl.removeEventListener('click', handleCarrinhoClick); // Remove listener antigo se existir
-    listaEl.addEventListener('click', handleCarrinhoClick);
+    // Anexa o listener uma única vez (idempotente). Evita múltiplas ligações quando a UI for re-renderizada.
+    if (listaEl.dataset.listenerAttached !== 'true') {
+        listaEl.addEventListener('click', handleCarrinhoClick);
+        listaEl.dataset.listenerAttached = 'true';
+    }
 }
 
 // Handler de cliques - função separada para facilitar remover/readicionar
 function handleCarrinhoClick(e) {
-    const botao = e.target;
+    // ... [Use a correção do .closest() que é crucial]
+    const botao = e.target.closest('button[data-id]'); 
     
-    if (!botao.classList) return;
-    
+    if (!botao) return; 
+
     const id = botao.getAttribute('data-id');
     
     if (!id) return;
-
-    if (botao.classList.contains('btn-mais')) {
-        e.preventDefault();
-        mudarQuantidade(id, 1);
-    } else if (botao.classList.contains('btn-menos')) {
-        e.preventDefault();
-        mudarQuantidade(id, -1);
+    
+    e.preventDefault(); 
+    
+    if (botao.classList.contains('btn-mais') || botao.classList.contains('btn-menos')) {
+        // A função mudarQuantidade() já lida com o render e setup
+        mudarQuantidade(id, botao.classList.contains('btn-mais') ? 1 : -1);
+        
     } else if (botao.classList.contains('btn-remover')) {
-        e.preventDefault();
-        removerItem(id);
+        // 1. Remove os dados do LocalStorage
+        removerItem(id); 
+        
+        // 2. FORÇA a re-renderização e re-anexação dos listeners, 
+        // caso a função de remoção em carrinho.js não esteja vazia.
+        renderizarCarrinho();
+        setupCarrinhoEventListeners();
     }
 }
 
 // CHAMA A FUNÇÃO DE RENDERIZAÇÃO AO CARREGAR A PÁGINA
 document.addEventListener('DOMContentLoaded', () => {
+    renderizarCarrinho();
+    setupCarrinhoEventListeners();
+});
+
+// Ouve o evento customizado disparado em saveCarrinho -> permite reatividade entre módulos
+document.addEventListener('carrinhoAtualizado', () => {
     renderizarCarrinho();
     setupCarrinhoEventListeners();
 });
@@ -178,5 +196,3 @@ function finalizarCompra() {
     setupCarrinhoEventListeners();
 }
 
-window.renderizarCarrinho = renderizarCarrinho;
-window.setupCarrinhoEventListeners = setupCarrinhoEventListeners;
