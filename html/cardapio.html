@@ -25,7 +25,10 @@
           <li><a href="cardapio.html">CARDAPIO</a></li>
           <li><a href="entregas.html">ENTREGAS</a></li>
           <li><a href="contato.html">CONTATO</a></li>
-          <li><a href="carrinho.html" target="_blank">CARRINHO</a></li>
+          <li style="position: relative;">
+            <a href="carrinho.html" target="_blank">CARRINHO</a>
+            <span class="carrinho-badge">0</span>
+          </li>
         </ul>
 
         <!-- Botão Hamburger (visível apenas no mobile) -->
@@ -42,7 +45,10 @@
         <li><a href="cardapio.html">CARDAPIO</a></li>
         <li><a href="entregas.html">ENTREGAS</a></li>
         <li><a href="contato.html">CONTATO</a></li>
-        <li><a href="carrinho.html" target="_blank">CARRINHO</a></li>
+        <li style="position: relative;">
+          <a href="carrinho.html" target="_blank">CARRINHO</a>
+          <span class="carrinho-badge">0</span>
+        </li>
       </ul>
     </nav>
   </header>
@@ -274,6 +280,7 @@
   <script src="../javascript/busca.js"></script>
   <script src="../javascript/pdf-generator.js"></script>
   <script src="../javascript/carrinho.js"></script>
+  <script src="../javascript/carrinho-render.js"></script>
 
   <!-- Google Translate Widget -->
   <script type="text/javascript">
@@ -314,7 +321,11 @@
                 <p>Preço: <span id="modal-preco">R$ 0,00</span></p>
                 <div class="modal-quantidade">
                     <label for="quantidade">Quantidade:</label>
-                    <input type="number" id="quantidade" value="1" min="1" onchange="atualizarSubtotal()" />
+                    <div class="quantidade-controle">
+                        <button type="button" class="btn-quantidade btn-menos" onclick="diminuirQuantidade()">−</button>
+                        <input type="number" id="quantidade" value="1" min="1" onchange="atualizarSubtotal()" />
+                        <button type="button" class="btn-quantidade btn-mais" onclick="aumentarQuantidade()">+</button>
+                    </div>
                 </div>
                 <p>Subtotal: <span id="modal-subtotal">R$ 0,00</span></p>
                 <button id="btn-adicionar" class="btn-cardapio" data-produto-id="" onclick="adicionarProdutoAoCarrinho()">

@@ -1,31 +1,61 @@
-// javascript/carrinho-render.js
+// ======================================
+// RENDERIZAÇÃO DO CARRINHO
+// ======================================
 
-function renderizarCarrinho() {
-    // 1. Pega os dados salvos pelo cardapio.html
-    const carrinho = getCarrinho(); 
+/**
+ * Atualiza o badge do contador de itens no header (se existir)
+ */
+function atualizarBadgeCarrinho() {
+    const carrinho = getCarrinho();
+    const totalItens = carrinho.reduce((soma, item) => soma + item.quantidade, 0);
     
-    // 2. Referencia os elementos HTML
-    const listaEl = document.getElementById('lista-carrinho');
-    const totalEl = document.getElementById('valor-total-carrinho');
+    // Tenta atualizar o badge em cardapio.html
+    const badge = document.querySelector('.carrinho-badge');
+    if (badge) {
+        badge.textContent = totalItens;
+        badge.style.display = totalItens > 0 ? 'flex' : 'none';
+    }
+    
+    // Tenta atualizar contador na página do carrinho
     const contadorEl = document.getElementById('contador-itens');
+    if (contadorEl) {
+        contadorEl.textContent = totalItens;
+    }
+}
+
+/**
+ * Renderiza os itens do carrinho na página
+ */
+function renderizarCarrinho() {
+    const carrinho = getCarrinho(); 
+    const listaEl = document.getElementById('lista-carrinho');
     const vazioEl = document.getElementById('carrinho-vazio');
 
     let totalGeral = 0;
     let totalItens = 0;
 
-    listaEl.innerHTML = ''; // Limpa a lista antes de reconstruir
+    // Se não estiver em página do carrinho, apenas atualiza badge
+    if (!listaEl) {
+        atualizarBadgeCarrinho();
+        return;
+    }
+
+    const totalEl = document.getElementById('valor-total-carrinho');
+    const contadorEl = document.getElementById('contador-itens');
+
+    listaEl.innerHTML = '';
 
     if (carrinho.length === 0) {
-        vazioEl.style.display = 'block';
+        if (vazioEl) vazioEl.style.display = 'block';
     } else {
-        vazioEl.style.display = 'none';
+        if (vazioEl) vazioEl.style.display = 'none';
         
         carrinho.forEach(item => {
             const subtotal = item.preco * item.quantidade;
             totalGeral += subtotal;
             totalItens += item.quantidade;
 
-            // 3. Cria o HTML para CADA item do carrinho
+            // Cria o HTML para cada item do carrinho
             const itemDiv = document.createElement('div');
             itemDiv.classList.add('carrinho-item');
             itemDiv.setAttribute('data-produto-id', item.id);
@@ -38,12 +68,12 @@ function renderizarCarrinho() {
                 </div>
                 <div class="item-acoes">
                     <div class="quantidade-input">
-                        <button class="btn-menos" data-id="${item.id}" type="button">-</button>
+                        <button class="btn-menos" data-id="${item.id}" type="button">−</button>
                         <span class="quantidade-valor">${item.quantidade}</span>
                         <button class="btn-mais" data-id="${item.id}" type="button">+</button>
                     </div>
                     <button class="btn-remover" data-id="${item.id}" type="button">
-                        Remover
+                        🗑️ Remover
                     </button>
                 </div>
             `;
@@ -51,97 +81,90 @@ function renderizarCarrinho() {
         });
     }
 
-    // 4. Atualiza os totais
-    totalEl.textContent = `R$ ${totalGeral.toFixed(2).replace('.', ',')}`;
-    contadorEl.textContent = totalItens;
+    // Atualiza os totais
+    if (totalEl) totalEl.textContent = `R$ ${totalGeral.toFixed(2).replace('.', ',')}`;
+    if (contadorEl) contadorEl.textContent = totalItens;
+
+    // Atualiza badge também
+    atualizarBadgeCarrinho();
 }
 
-// Função para mudar a quantidade (usa as funções de lógica do carrinho.js)
+/**
+ * Muda a quantidade de um item no carrinho
+ */
 function mudarQuantidade(id, delta) {
     let carrinho = getCarrinho();
-    // Normaliza tipos para evitar problemas quando id vier como number ou string
     const item = carrinho.find(i => String(i.id) === String(id));
 
     if (item) {
         item.quantidade += delta;
 
         if (item.quantidade < 1) {
-            // 1. Remove o item (somente lógica de dados)
-            removerItem(id); // Chama a função AGORA vazia de render em carrinho.js
+            removerItem(id);
         } else {
-            // 2. Salva a nova quantidade
             saveCarrinho(carrinho);
         }
         
-        // 3. AQUI ESTÁ A CHAVE: CHAMA A RENDERIZAÇÃO APÓS QUALQUER MUDANÇA (remove, aumenta ou diminui)
         renderizarCarrinho();
         setupCarrinhoEventListeners();
     }
 }
 
-// Setup dos event listeners - executado APÓS o DOM estar pronto
+/**
+ * Configura os event listeners do carrinho
+ */
 function setupCarrinhoEventListeners() {
     const listaEl = document.getElementById('lista-carrinho');
-    if (!listaEl) return;
+    if (!listaEl) return; // Se não está em página do carrinho, não faz nada
 
-    // Anexa o listener uma única vez (idempotente). Evita múltiplas ligações quando a UI for re-renderizada.
-    if (listaEl.dataset.listenerAttached !== 'true') {
-        listaEl.addEventListener('click', handleCarrinhoClick);
-        listaEl.dataset.listenerAttached = 'true';
-    }
+    // Remove listener anterior para evitar duplicatas
+    listaEl.removeEventListener('click', handleCarrinhoClick);
+    
+    // Adiciona novo listener
+    listaEl.addEventListener('click', handleCarrinhoClick);
 }
 
-// Handler de cliques - função separada para facilitar remover/readicionar
+/**
+ * Handler de cliques dos botões do carrinho
+ */
 function handleCarrinhoClick(e) {
-    // ... [Use a correção do .closest() que é crucial]
     const botao = e.target.closest('button[data-id]'); 
     
     if (!botao) return; 
 
     const id = botao.getAttribute('data-id');
-    
     if (!id) return;
     
     e.preventDefault(); 
     
-    if (botao.classList.contains('btn-mais') || botao.classList.contains('btn-menos')) {
-        // A função mudarQuantidade() já lida com o render e setup
-        mudarQuantidade(id, botao.classList.contains('btn-mais') ? 1 : -1);
-        
+    if (botao.classList.contains('btn-mais')) {
+        mudarQuantidade(id, 1);
+    } else if (botao.classList.contains('btn-menos')) {
+        mudarQuantidade(id, -1);
     } else if (botao.classList.contains('btn-remover')) {
-        // 1. Remove os dados do LocalStorage
         removerItem(id); 
-        
-        // 2. FORÇA a re-renderização e re-anexação dos listeners, 
-        // caso a função de remoção em carrinho.js não esteja vazia.
         renderizarCarrinho();
         setupCarrinhoEventListeners();
     }
 }
 
-// CHAMA A FUNÇÃO DE RENDERIZAÇÃO AO CARREGAR A PÁGINA
-document.addEventListener('DOMContentLoaded', () => {
-    renderizarCarrinho();
-    setupCarrinhoEventListeners();
-});
-
-// Ouve o evento customizado disparado em saveCarrinho -> permite reatividade entre módulos
-document.addEventListener('carrinhoAtualizado', () => {
-    renderizarCarrinho();
-    setupCarrinhoEventListeners();
-});
-
-
+/**
+ * Limpa o carrinho após confirmação
+ */
 function limparCarrinho() {
     if (confirm("Tem certeza que deseja limpar todo o carrinho?")) {
         localStorage.removeItem('carrinhoHapuque');
         renderizarCarrinho();
-        setupCarrinhoEventListeners();
+        if (document.getElementById('lista-carrinho')) {
+            setupCarrinhoEventListeners();
+        }
     }
 }
 
+/**
+ * Finaliza a compra e envia para WhatsApp
+ */
 function finalizarCompra() {
-    // Lê o carrinho e valida
     const carrinho = getCarrinho();
 
     if (!carrinho || carrinho.length === 0) {
@@ -149,28 +172,28 @@ function finalizarCompra() {
         return;
     }
 
-    // Lê os dados do cliente do formulário (se presentes)
-    const nomeCliente = (document.getElementById('cliente-nome') && document.getElementById('cliente-nome').value.trim()) || '';
-    const telefoneCliente = (document.getElementById('cliente-telefone') && document.getElementById('cliente-telefone').value.trim()) || '';
-    const enderecoCliente = (document.getElementById('cliente-endereco') && document.getElementById('cliente-endereco').value.trim()) || '';
+    // Lê dados do cliente
+    const nomeCliente = (document.getElementById('cliente-nome')?.value.trim()) || '';
+    const telefoneCliente = (document.getElementById('cliente-telefone')?.value.trim()) || '';
+    const enderecoCliente = (document.getElementById('cliente-endereco')?.value.trim()) || '';
 
-    // Recomendamos pelo menos o nome e telefone (telefone opcional dependendo do fluxo)
     if (!nomeCliente) {
         if (!confirm('Você não informou seu nome. Deseja continuar mesmo assim?')) return;
     }
 
-    // Monta linhas de itens e calcula total
+    // Monta linhas de itens
     let totalGeral = 0;
     const linhas = carrinho.map(item => {
         const subtotal = item.preco * item.quantidade;
         totalGeral += subtotal;
-        return `${item.quantidade} x ${item.nome} - R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+        return `${item.quantidade}x ${item.nome} - R$ ${subtotal.toFixed(2).replace('.', ',')}`;
     });
 
+    // Cria ID do pedido
     const dataPedido = new Date();
-    const pedidoId = `PED-${dataPedido.getFullYear()}${(dataPedido.getMonth()+1).toString().padStart(2,'0')}${dataPedido.getDate().toString().padStart(2,'0')}-${dataPedido.getHours().toString().padStart(2,'0')}${dataPedido.getMinutes().toString().padStart(2,'0')}${dataPedido.getSeconds().toString().padStart(2,'0')}`;
+    const pedidoId = `PED-${dataPedido.getFullYear()}${String(dataPedido.getMonth()+1).padStart(2,'0')}${String(dataPedido.getDate()).padStart(2,'0')}-${String(dataPedido.getHours()).padStart(2,'0')}${String(dataPedido.getMinutes()).padStart(2,'0')}${String(dataPedido.getSeconds()).padStart(2,'0')}`;
 
-    // Monta mensagem em texto simples e codifica no final
+    // Monta mensagem
     let mensagemTexto = `Olá, gostaria de fazer um pedido (${pedidoId})\n\n`;
     linhas.forEach(l => { mensagemTexto += `${l}\n`; });
     mensagemTexto += `\nTotal: R$ ${totalGeral.toFixed(2).replace('.', ',')}\n\n`;
@@ -178,21 +201,46 @@ function finalizarCompra() {
     if (telefoneCliente) mensagemTexto += `Telefone: ${telefoneCliente}\n`;
     if (enderecoCliente) mensagemTexto += `Endereço: ${enderecoCliente}\n`;
 
-    // Obtém número do botão (data-whatsapp) ou usa fallback
+    // Obtém número de WhatsApp
     const btn = document.getElementById('btn-finalizar');
-    const telefone = (btn && btn.getAttribute('data-whatsapp')) ? btn.getAttribute('data-whatsapp') : '5511940261055';
+    const telefone = (btn?.getAttribute('data-whatsapp')) || '5511940261055';
 
-    // Confirmação antes de abrir WhatsApp e limpar o carrinho
-    const confirmar = confirm('Abrir WhatsApp para finalizar o pedido? Ao confirmar, o carrinho será limpo localmente.');
+    // Confirmação
+    const confirmar = confirm('Abrir WhatsApp para finalizar o pedido?');
     if (!confirmar) return;
 
-    // Cria URL com encodeURIComponent
+    // Abre WhatsApp
     const url = `https://wa.me/${telefone}?text=${encodeURIComponent(mensagemTexto)}`;
     window.open(url, '_blank');
 
-    // Limpa carrinho local e re-renderiza
+    // Limpa carrinho
     localStorage.removeItem('carrinhoHapuque');
     renderizarCarrinho();
-    setupCarrinhoEventListeners();
+    if (document.getElementById('lista-carrinho')) {
+        setupCarrinhoEventListeners();
+    }
 }
+
+// ======================================
+// INICIALIZAÇÃO
+// ======================================
+
+document.addEventListener('DOMContentLoaded', () => {
+    renderizarCarrinho();
+    setupCarrinhoEventListeners();
+});
+
+// Atualiza carrinho quando evento é disparado (de qualquer página)
+document.addEventListener('carrinhoAtualizado', () => {
+    renderizarCarrinho();
+    setupCarrinhoEventListeners();
+});
+
+// Sincroniza carrinho em tempo real quando localStorage muda (em outra aba)
+window.addEventListener('storage', (e) => {
+    if (e.key === 'carrinhoHapuque') {
+        renderizarCarrinho();
+        setupCarrinhoEventListeners();
+    }
+});
 

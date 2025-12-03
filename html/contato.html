@@ -77,30 +77,35 @@
       </div>
 
       <div class="contato-direita">
-        <form>
+        <form id="formularioContato" onsubmit="validarFormularioContato(event)">
           <div class="duas-colunas">
             <div class="campo">
               <label>Primeiro nome*</label>
-              <input type="text" placeholder="" />
+              <input type="text" placeholder="" required />
             </div>
 
             <div class="campo">
               <label>Último nome*</label>
-              <input type="text" placeholder="" />
+              <input type="text" placeholder="" required />
             </div>
           </div>
 
           <div class="campo">
             <label>E-mail*</label>
-            <input type="email" placeholder="" />
+            <input type="email" placeholder="" required />
           </div>
 
           <div class="campo">
-            <label>Mensagem*</label>
+            <label>Telefone*</label>
+            <input type="tel" placeholder="(11) 9xxxx-xxxx" required />
+          </div>
+
+          <div class="campo">
+            <label>Mensagem</label>
             <textarea></textarea>
           </div>
 
-          <button class="btn-enviar">ENVIAR</button>
+          <button type="submit" class="btn-enviar">ENVIAR</button>
         </form>
       </div>
     </section>
@@ -173,6 +178,7 @@
   </footer>
 
   <script src="../javascript/menu.js"></script>
+  <script src="../javascript/validacao-formularios.js"></script>
 
   <!-- Google Translate Widget -->
   <script type="text/javascript">
@@ -202,6 +208,8 @@
 <script>
   new window.VLibras.Widget('https://vlibras.gov.br/app');
 </script>
+
+
 
 </body>
 

@@ -1,38 +1,46 @@
-// Função para abrir o modal com os dados do produto clicado
+/**
+ * Abre o modal do produto com as informações do item clicado
+ */
 function abrirModal(elementoDoce) {
     const nome = elementoDoce.querySelector('h3').textContent;
     const precoTexto = elementoDoce.querySelector('.card-price').textContent.replace('R$ ', '').replace(',', '.');
     const preco = parseFloat(precoTexto);
     const imagemSrc = elementoDoce.querySelector('img').src;
     
-    // Obter um ID único para o produto (pode ser o nome, mas melhor se for um ID real)
-    // Usaremos o nome como ID por enquanto, mas o ideal é ter um ID no HTML
-    const id = nome.replace(/\s/g, '-').toLowerCase(); 
+    // Gera ID único baseado no nome
+    const id = nome.replace(/\s+/g, '-').toLowerCase(); 
 
-    // 1. Preenche o Modal
+    // Preenche o modal com dados do produto
     document.getElementById('modal-nome').textContent = nome;
     document.getElementById('modal-preco').textContent = precoTexto;
     document.getElementById('modal-imagem').src = imagemSrc;
     document.getElementById('quantidade').value = 1;
 
-    // 2. Associa o ID e o Preço ao botão de adicionar para uso posterior
+    // Armazena dados no botão de adicionar
     const btnAdicionar = document.getElementById('btn-adicionar');
     btnAdicionar.setAttribute('data-produto-id', id);
     btnAdicionar.setAttribute('data-produto-nome', nome);
     btnAdicionar.setAttribute('data-produto-preco', preco);
     btnAdicionar.setAttribute('data-produto-imagem', imagemSrc);
 
-    // 3. Atualiza o subtotal inicial e exibe o modal
+    // Atualiza subtotal e exibe modal
     atualizarSubtotal();
     document.getElementById('modal-produto').style.display = 'block';
 }
 
+/**
+ * Fecha o modal do produto
+ */
 function fecharModal() {
     document.getElementById('modal-produto').style.display = 'none';
 }
 
+/**
+ * Atualiza o subtotal exibido no modal
+ */
 function atualizarSubtotal() {
-    const preco = parseFloat(document.getElementById('btn-adicionar').getAttribute('data-produto-preco'));
+    const btnAdicionar = document.getElementById('btn-adicionar');
+    const preco = parseFloat(btnAdicionar.getAttribute('data-produto-preco'));
     const quantidade = parseInt(document.getElementById('quantidade').value);
     
     if (isNaN(preco) || isNaN(quantidade) || quantidade < 1) {
@@ -44,48 +52,84 @@ function atualizarSubtotal() {
     document.getElementById('modal-subtotal').textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
 }
 
-// Vincula a função abrirModal a cada item do cardápio
+/**
+ * Aumenta a quantidade no modal
+ */
+function aumentarQuantidade() {
+    const quantidadeInput = document.getElementById('quantidade');
+    let valor = parseInt(quantidadeInput.value) || 1;
+    valor += 1;
+    quantidadeInput.value = valor;
+    atualizarSubtotal();
+}
+
+/**
+ * Diminui a quantidade no modal
+ */
+function diminuirQuantidade() {
+    const quantidadeInput = document.getElementById('quantidade');
+    let valor = parseInt(quantidadeInput.value) || 1;
+    if (valor > 1) {
+        valor -= 1;
+        quantidadeInput.value = valor;
+        atualizarSubtotal();
+    }
+}
+
+// Configura listeners dos produtos quando DOM está pronto
 document.addEventListener('DOMContentLoaded', () => {
+    // Adiciona listener para cada produto do cardápio
     document.querySelectorAll('.doce-item').forEach(item => {
         item.addEventListener('click', function() {
-            // Passa o elemento clicado para a função abrirModal
             abrirModal(this); 
         });
     });
+
+    // Fecha modal ao clicar fora dele
+    const modal = document.getElementById('modal-produto');
+    if (modal) {
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                fecharModal();
+            }
+        });
+    }
 });
 
 
 
-// 1. LÊ O LOCALSTORAGE
+/**
+ * Lê o carrinho do localStorage
+ */
 function getCarrinho() {
     const carrinhoJSON = localStorage.getItem('carrinhoHapuque');
     return carrinhoJSON ? JSON.parse(carrinhoJSON) : [];
 }
 
-// 2. SALVA NO LOCALSTORAGE (usada por outras funções de manipulação)
+/**
+ * Salva o carrinho no localStorage e dispara evento de atualização
+ */
 function saveCarrinho(carrinho) {
     localStorage.setItem('carrinhoHapuque', JSON.stringify(carrinho));
-    // Dispara um evento customizado para notificar outros módulos que o carrinho foi atualizado
-    // Isso torna a UI reativa: qualquer listener pode reagir a mudanças sem depender de chamadas diretas
     try {
         document.dispatchEvent(new CustomEvent('carrinhoAtualizado', { detail: { carrinho } }));
     } catch (e) {
-        // Em ambientes onde `document` não existe (testes fora do browser) falha silenciosamente
-        // Mantemos o salvamento no localStorage como a fonte da verdade.
+        // Falha silenciosa em ambientes sem document
     }
 }
 
-// NO ARQUIVO: javascript/carrinho.js
-
-// 3. REMOVE UM ITEM (ou diminui a quantidade)
+/**
+ * Remove um item do carrinho
+ */
 function removerItem(id) {
     let carrinho = getCarrinho();
-    // Normaliza tipos para evitar problemas entre string/number
     carrinho = carrinho.filter(item => String(item.id) !== String(id));
     saveCarrinho(carrinho);
 }
 
-// Função para adicionar o produto (configurado no modal) ao carrinho
+/**
+ * Adiciona o produto do modal ao carrinho
+ */
 function adicionarProdutoAoCarrinho() {
     const btn = document.getElementById('btn-adicionar');
     if (!btn) return;
@@ -102,7 +146,7 @@ function adicionarProdutoAoCarrinho() {
     }
 
     let carrinho = getCarrinho();
-    const existente = carrinho.find(item => item.id === id);
+    const existente = carrinho.find(item => String(item.id) === String(id));
 
     if (existente) {
         existente.quantidade += quantidade;
@@ -111,13 +155,12 @@ function adicionarProdutoAoCarrinho() {
     }
 
     saveCarrinho(carrinho);
-
-    // Fecha o modal e atualiza a página do carrinho caso esteja aberta
     fecharModal();
+    
+    alert(`${quantidade} x ${nome} adicionado(s) ao carrinho.`);
+
+    // Atualiza renderização se estiver na página do carrinho
     if (typeof renderizarCarrinho === 'function') {
         renderizarCarrinho();
     }
-
-
-    alert(`${quantidade} x ${nome} adicionado(s) ao carrinho.`);
 }

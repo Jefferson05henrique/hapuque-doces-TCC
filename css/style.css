@@ -1582,6 +1582,18 @@ footer {
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     cursor: pointer;
     transition: transform 0.2s;
+    text-decoration: none;
+    border: none;
+    padding: 0;
+}
+
+.JoinChat-button a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
 }
 
 .JoinChat-button:hover {
@@ -1590,6 +1602,9 @@ footer {
 
 .JoinChat-button img {
     width: 35px;
+    height: 35px;
+    object-fit: contain;
+    display: block;
 }
 
 /* RESPONSIVO: BOTÃO WHATSAPP */
@@ -1604,8 +1619,15 @@ footer {
     height: 55px;
   }
 
+  .JoinChat-button a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .JoinChat-button img {
-    width: 30px;
+    width: 28px;
+    height: 28px;
   }
 }
 
@@ -1620,8 +1642,15 @@ footer {
     height: 50px;
   }
 
+  .JoinChat-button a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .JoinChat-button img {
-    width: 28px;
+    width: 26px;
+    height: 26px;
   }
 }
 
@@ -1636,8 +1665,15 @@ footer {
     height: 45px;
   }
 
+  .JoinChat-button a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .JoinChat-button img {
     width: 24px;
+    height: 24px;
   }
 }
 
@@ -1907,21 +1943,29 @@ footer {
 
 .modal-content {
     background-color: #fefefe;
-    margin: 15% auto; /* 15% do topo e centralizado */
+    margin: auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; /* Pode ajustar a largura */
+    width: 90%;
     max-width: 500px;
-    border-radius: 8px;
+    border-radius: 12px;
     position: relative;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    max-height: 90vh;
+    overflow-y: auto;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .close-button {
     color: #aaa;
-    float: right;
+    position: absolute;
+    top: 12px;
+    right: 15px;
     font-size: 28px;
     font-weight: bold;
+    line-height: 20px;
+    padding: 0;
 }
 
 .close-button:hover,
@@ -1930,16 +1974,221 @@ footer {
     text-decoration: none;
     cursor: pointer;
 }
+
 /* Estilização para o conteúdo interno do modal */
 .modal-body {
     display: flex;
-    gap: 20px;
+    flex-direction: column;
+    gap: 15px;
+    padding-top: 10px;
 }
+
 #modal-imagem {
-    width: 40%;
+    width: 100%;
     height: auto;
+    max-height: 300px;
     object-fit: cover;
+    border-radius: 8px;
+}
+
+.modal-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.modal-info h3 {
+    margin: 0 0 10px 0;
+    font-size: clamp(18px, 5vw, 24px);
+    color: var(--CorTercearia);
+}
+
+.modal-info p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: var(--CorSecundaria);
+}
+
+.modal-quantidade {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 10px 0;
+    flex-wrap: wrap;
+}
+
+.modal-quantidade label {
+    font-weight: 600;
+    color: var(--CorTercearia);
+    font-size: 14px;
+    width: 100%;
+}
+
+.quantidade-controle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 2px;
+    background-color: #fafafa;
+}
+
+.btn-quantidade {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    color: var(--CorTercearia);
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
     border-radius: 4px;
+}
+
+.btn-quantidade:hover {
+    background-color: #ffe8eb;
+    color: #c2185b;
+}
+
+.btn-quantidade:active {
+    transform: scale(0.95);
+}
+
+.quantidade-controle input {
+    width: 50px;
+    padding: 6px 4px;
+    border: none;
+    background-color: transparent;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    color: var(--CorTercearia);
+}
+
+.quantidade-controle input::-webkit-outer-spin-button,
+.quantidade-controle input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.quantidade-controle input[type=number] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+/* Responsivo: Modal em telas pequenas */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+        max-width: 100%;
+        margin: 10px auto;
+        padding: 15px;
+        border-radius: 10px;
+    }
+
+    .modal-body {
+        gap: 12px;
+    }
+
+    #modal-imagem {
+        max-height: 250px;
+    }
+
+    .modal-info h3 {
+        font-size: 18px;
+    }
+
+    .close-button {
+        top: 10px;
+        right: 12px;
+        font-size: 24px;
+    }
+
+    .quantidade-controle {
+        gap: 7px;
+    }
+
+    .btn-quantidade {
+        width: 34px;
+        height: 34px;
+        font-size: 18px;
+    }
+
+    .quantidade-controle input {
+        width: 48px;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-content {
+        width: 95%;
+        max-width: 100%;
+        padding: 12px;
+        border-radius: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .modal-body {
+        gap: 10px;
+    }
+
+    #modal-imagem {
+        max-height: 200px;
+        border-radius: 6px;
+    }
+
+    .modal-info h3 {
+        font-size: 16px;
+        margin-bottom: 8px;
+    }
+
+    .modal-info p {
+        font-size: 13px;
+    }
+
+    .modal-quantidade {
+        gap: 8px;
+        margin: 8px 0;
+    }
+
+    .modal-quantidade label {
+        font-size: 13px;
+        width: 100%;
+    }
+
+    .quantidade-controle {
+        gap: 6px;
+        padding: 2px;
+    }
+
+    .btn-quantidade {
+        width: 32px;
+        height: 32px;
+        font-size: 18px;
+    }
+
+    .quantidade-controle input {
+        width: 45px;
+        padding: 4px 2px;
+        font-size: 14px;
+    }
+
+    .close-button {
+        font-size: 20px;
+    }
+
+    .btn-cardapio {
+        padding: 12px !important;
+        font-size: 14px !important;
+    }
 }
 /* MODAL DO CARDÁPIO */
 
@@ -2841,4 +3090,236 @@ footer {
 
 .trabalhe-form .campo input[type="file"] {
   width: auto;
+}
+
+/* ============================================
+   DADOS DO CLIENTE - FORMULÁRIO
+   ============================================ */
+
+.cliente-dados {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+  background: var(--FundoClaro);
+  border-radius: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #e0c5c5;
+}
+
+.cliente-dados label {
+  font-size: clamp(14px, 2vw, 16px);
+  color: var(--CorTercearia);
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.cliente-dados input {
+  padding: 12px 15px;
+  border: 1px solid #e0c5c5;
+  border-radius: 8px;
+  font-size: clamp(14px, 2vw, 16px);
+  font-family: "Cormorant Garamond", serif;
+  transition: all 0.3s ease;
+  background: white;
+}
+
+.cliente-dados input:focus {
+  outline: none;
+  border-color: #ff9a9e;
+  box-shadow: 0 0 0 3px rgba(255, 154, 158, 0.2);
+}
+
+/* ============================================
+   RESPONSIVO - CARRINHO MOBILE
+   ============================================ */
+
+@media (max-width: 768px) {
+  .cliente-dados {
+    padding: 15px;
+    gap: 12px;
+  }
+
+  .cliente-dados input {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+}
+
+/* ============================================
+   BADGE DO CARRINHO
+   ============================================ */
+
+.carrinho-badge {
+  display: none;
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 24px;
+  height: 24px;
+  background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+  color: white;
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 12px;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(255, 107, 107, 0.4);
+  animation: pulse-badge 0.6s ease-in-out;
+}
+
+@keyframes pulse-badge {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ============================================
+   NOTIFICAÇÕES (Toast Messages)
+   ============================================ */
+
+.notificacao {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 10000;
+  animation: slideInRight 0.4s ease-out;
+  max-width: 400px;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(450px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(450px);
+    opacity: 0;
+  }
+}
+
+.notificacao-conteudo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Notificação de Sucesso */
+.notificacao-sucesso .notificacao-conteudo {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+}
+
+.notificacao-sucesso .notificacao-fechar {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.notificacao-sucesso .notificacao-fechar:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Notificação de Erro */
+.notificacao-erro .notificacao-conteudo {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: white;
+}
+
+.notificacao-erro .notificacao-fechar {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.notificacao-erro .notificacao-fechar:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.notificacao-mensagem {
+  font-size: 14px;
+  font-weight: 500;
+  flex-grow: 1;
+}
+
+.notificacao-fechar {
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+  padding: 0;
+  line-height: 1;
+}
+
+.notificacao-fechar:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Responsivo: Notificações em Mobile */
+@media (max-width: 768px) {
+  .notificacao {
+    top: 12px;
+    right: 12px;
+    left: 12px;
+    max-width: none;
+  }
+
+  .notificacao-conteudo {
+    padding: 14px 16px;
+  }
+
+  .notificacao-mensagem {
+    font-size: 13px;
+  }
+
+  .notificacao-fechar {
+    width: 26px;
+    height: 26px;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .notificacao {
+    top: 10px;
+    right: 10px;
+    left: 10px;
+  }
+
+  .notificacao-conteudo {
+    padding: 12px 14px;
+  }
+
+  .notificacao-mensagem {
+    font-size: 12px;
+  }
 }

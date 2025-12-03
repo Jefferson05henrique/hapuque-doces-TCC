@@ -57,35 +57,35 @@
     </div>
 
     <!-- Formulário com duas colunas -->
-    <form class="trabalhe-form">
+    <form class="trabalhe-form" id="formularioTrabalhe" onsubmit="validarFormularioTrabalhe(event)">
       <div class="duas-colunas">
         <!-- Coluna A: Primeiro nome, Último nome, E-mail -->
         <div class="col-left">
           <div class="campo">
             <label>Primeiro nome*</label>
-            <input type="text" placeholder="" />
+            <input type="text" placeholder="" required />
           </div>
 
           <div class="campo">
             <label>Último nome*</label>
-            <input type="text" placeholder="" />
+            <input type="text" placeholder="" required />
           </div>
 
           <div class="campo">
             <label>E-mail*</label>
-            <input type="email" placeholder="" />
+            <input type="email" placeholder="" required />
           </div>
 
           <div class="campo">
             <label>Telefone*</label>
-            <input type="tel" placeholder="(11) 9xxxx-xxxx" />
+            <input type="tel" placeholder="(11) 9xxxx-xxxx" required />
           </div>
         </div>
 
-        <!-- Coluna B: Telefone, Mensagem -->
+        <!-- Coluna B: Currículo e Mensagem -->
         <div class="col-right">
           <div class="campo">
-            <label>Currículo*</label>
+            <label>Currículo</label>
             <input type="file" />
           </div>
 
@@ -97,7 +97,7 @@
       </div>
 
       <div class="form-actions">
-        <button class="btn-enviar">ENVIAR</button>
+        <button type="submit" class="btn-enviar">ENVIAR</button>
       </div>
     </form>
   </section>
@@ -169,6 +169,7 @@
     </div>
   </footer>
   <script src="../javascript/menu.js"></script>
+  <script src="../javascript/validacao-formularios.js"></script>
 
   <!-- Google Translate Widget -->
   <script type="text/javascript">
@@ -198,6 +199,8 @@
 <script>
   new window.VLibras.Widget('https://vlibras.gov.br/app');
 </script>
+
+
 
 </body>
 
