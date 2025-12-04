@@ -6,9 +6,9 @@ function abrirModal(elementoDoce) {
     const precoTexto = elementoDoce.querySelector('.card-price').textContent.replace('R$ ', '').replace(',', '.');
     const preco = parseFloat(precoTexto);
     const imagemSrc = elementoDoce.querySelector('img').src;
-    
+
     // Gera ID único baseado no nome
-    const id = nome.replace(/\s+/g, '-').toLowerCase(); 
+    const id = nome.replace(/\s+/g, '-').toLowerCase();
 
     // Preenche o modal com dados do produto
     document.getElementById('modal-nome').textContent = nome;
@@ -42,12 +42,12 @@ function atualizarSubtotal() {
     const btnAdicionar = document.getElementById('btn-adicionar');
     const preco = parseFloat(btnAdicionar.getAttribute('data-produto-preco'));
     const quantidade = parseInt(document.getElementById('quantidade').value);
-    
+
     if (isNaN(preco) || isNaN(quantidade) || quantidade < 1) {
         document.getElementById('modal-subtotal').textContent = 'R$ 0,00';
         return;
     }
-    
+
     const subtotal = preco * quantidade;
     document.getElementById('modal-subtotal').textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
 }
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Adiciona listener para cada produto do cardápio
     document.querySelectorAll('.doce-item').forEach(item => {
         item.addEventListener('click', function() {
-            abrirModal(this); 
+            abrirModal(this);
         });
     });
 
@@ -156,7 +156,7 @@ function adicionarProdutoAoCarrinho() {
 
     saveCarrinho(carrinho);
     fecharModal();
-    
+
     alert(`${quantidade} x ${nome} adicionado(s) ao carrinho.`);
 
     // Atualiza renderização se estiver na página do carrinho
