@@ -770,6 +770,7 @@ main {
   opacity: 0;
   transform: translateY(50px);
   transition: all 0.6s ease;
+  cursor: pointer;
 }
 
 /* Estado visível do card - ativado por JavaScript */
@@ -1377,6 +1378,7 @@ textarea {
   align-items: center !important;
   margin-left: auto !important;
   margin-right: 20px !important;
+  overflow: visible !important;
 }
 
 .goog-te-gadget {
@@ -1384,6 +1386,7 @@ textarea {
   color: var(--CorPrincipal) !important;
   display: flex !important;
   align-items: center !important;
+  overflow: visible !important;
 }
 
 .goog-te-gadget-simple {
@@ -1393,6 +1396,8 @@ textarea {
   border-radius: 4px !important;
   display: flex !important;
   align-items: center !important;
+  overflow: visible !important;
+  white-space: nowrap !important;
 }
 
 .goog-te-gadget-simple .goog-te-combo {
@@ -1410,38 +1415,72 @@ textarea {
   background-color: #f5f5f5 !important;
 }
 
+/* Botão de fechar do tradutor */
+.goog-te-gadget .goog-te-gadget-simple::after {
+  display: none;
+}
+
+.goog-te-tooltip {
+  display: none !important;
+}
+
 /* Mobile responsivo */
 @media (max-width: 768px) {
   #google_translate_element {
-    margin-left: 10px !important;
-    margin-right: 10px !important;
-    order: 4 !important;
+    position: fixed !important;
+    top: 80px !important;
+    right: 10px !important;
+    z-index: 1100 !important;
+    margin: 0 !important;
   }
 
   .goog-te-gadget-simple {
     padding: 4px 8px !important;
     border-width: 1px !important;
+    flex-wrap: wrap !important;
   }
 
   .goog-te-gadget-simple .goog-te-combo {
     font-size: 12px !important;
     padding: 2px 4px !important;
   }
+
+  .skiptranslate {
+    display: flex !important;
+    gap: 5px !important;
+  }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 480px) {
   #google_translate_element {
-    margin-left: 5px !important;
-    margin-right: 5px !important;
+    top: 75px !important;
+    right: 8px !important;
   }
 
   .goog-te-gadget-simple {
     padding: 3px 6px !important;
+    min-width: auto !important;
   }
 
   .goog-te-gadget-simple .goog-te-combo {
     font-size: 11px !important;
     padding: 2px 3px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  #google_translate_element {
+    top: 70px !important;
+    right: 5px !important;
+  }
+
+  .goog-te-gadget-simple {
+    padding: 2px 5px !important;
+  }
+
+  .goog-te-gadget-simple .goog-te-combo {
+    font-size: 10px !important;
+    padding: 1px 2px !important;
   }
 }
 
