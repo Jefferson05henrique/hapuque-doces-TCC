@@ -46,6 +46,7 @@ a {
   color: var(--CorTercearia);
   transition: all 0.3s ease;
   /* Transição suave para hover */
+
 }
 
 /* Tamanho padrão das imagens usando variáveis CSS */
@@ -3362,3 +3363,5 @@ footer {
     font-size: 12px;
   }
 }
+
+
